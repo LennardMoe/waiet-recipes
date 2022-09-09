@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -5,18 +7,31 @@
   font-family: "Montserrat", sans-serif;
 }
 
+:root {
+  --bg-green: #74c085;
+  --primary-red: #732e36;
+  --text-green: #b3ffc3;
+  --bright-red: #bf737c;
+  --dark-green: #397346;
+  --border: rgba(0, 0, 0, 0.8);
+  --border-bright: rgba(228, 224, 224, 0.805);
+  --dark: #0f0e0e;
+}
+
 body {
   margin: 0% 20%;
+  background: var(--bg-green);
 }
 
 h4 {
   font-size: 1rem;
-  color: rgb(56, 56, 56);
+  color: var(--primary-red);
 }
 
 h3 {
   font-size: 1.5rem;
-  color: rgb(56, 56, 56);
+  color: var(--primary-red);
+  text-shadow: 2px 2px 4px var(--border-bright);
   line-height: 2.5rem;
   margin: 2rem 0rem;
 }
