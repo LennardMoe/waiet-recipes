@@ -4,14 +4,16 @@ import Category from "./components/Category";
 import { BrowserRouter } from "react-router-dom";
 import Search from "./components/Search";
 import Navbar from "./components/Navbar";
+import NewRecipe from "./components/NewRecipe";
 
 function App() {
   return (
     <div className='App'>
       <BrowserRouter>
         <Navbar />
-        <Search />
+        {/* <Search /> */}
         <Category />
+        <NewRecipe />
         <Pages />
       </BrowserRouter>
     </div>

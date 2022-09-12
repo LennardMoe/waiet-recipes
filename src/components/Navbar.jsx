@@ -4,7 +4,7 @@ import { GiKnifeFork } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../firebase";
-
+import Search from "./Search";
 function Navbar() {
   const [user, setUser] = useState({});
 
@@ -22,6 +22,7 @@ function Navbar() {
         <GiKnifeFork />
         <Logo to={"/"}> WAIET Recipes </Logo>
       </Nav>
+      <Search />
       <Login>
         {user ? (
           <div className='navbar__wrapper'>
@@ -48,9 +49,10 @@ function Navbar() {
 
 const Wrapper = styled.nav`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  flex-direction: row;
+  margin: 0;
+  box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.2);
 `;
 
 const Logo = styled(Link)`
@@ -65,7 +67,6 @@ const Logo = styled(Link)`
 const Nav = styled.div`
   padding: 2rem 0rem;
   display: flex;
-  justify-content: flex-start;
   align-items: center;
   svg {
     font-size: 2rem;
