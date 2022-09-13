@@ -1,9 +1,12 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 function NewRecipe() {
   return (
     <Wrapper>
-      <Button> Create new Recipe</Button>
+      <Link to={"/createrecipe/"}>
+        <Button> New Recipe</Button>
+      </Link>
     </Wrapper>
   );
 }
@@ -15,16 +18,16 @@ const Wrapper = styled.div`
 `;
 
 const Button = styled.button`
-  width: 20rem;
-  padding: 1.2rem;
+  min-width: 15rem;
+  padding: 1rem;
   background: var(--primary-red);
   border-radius: 5px;
   text-decoration: none;
   border: none;
-
+  letter-spacing: 4px;
   color: #b3ffc3;
   font-weight: 400;
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-family: "Alata";
   cursor: pointer;
   :hover {

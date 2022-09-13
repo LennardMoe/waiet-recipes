@@ -34,7 +34,7 @@ const FormStyle = styled.form`
   }
   input {
     border: none;
-    background: linear-gradient(35deg, #d9d9d9, #dfdada);
+    background: linear-gradient(35deg, #fffbfb, #dfdada);
     font-size: 1.2rem;
     color: #0f0e0e;
     padding: 1rem 3rem;
@@ -42,6 +42,9 @@ const FormStyle = styled.form`
     border-radius: 1rem;
     outline: none;
     width: 100%;
+  }
+  input:focus {
+    border: var(--dark) 1px solid;
   }
   svg {
     position: absolute;
