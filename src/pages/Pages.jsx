@@ -7,9 +7,12 @@ import Recipe from "./Recipe";
 import Register from "./Register";
 import { AnimatePresence } from "framer-motion";
 import Login from "./Login";
+import CreateRecipe from "./CreateRecipe";
 
 function Pages() {
   const location = useLocation();
+  const show = !location.pathname.includes("createrecipe");
+
   return (
     <AnimatePresence exitBeforeEnter>
       <Routes location={location} key={location.pathname}>
@@ -19,6 +22,7 @@ function Pages() {
         <Route path='/recipe/:name' element={<Recipe />} />
         <Route path='/Register' element={<Register />} />
         <Route path='/Login' element={<Login />} />
+        <Route path='/createrecipe' element={<CreateRecipe />} />
       </Routes>
     </AnimatePresence>
   );

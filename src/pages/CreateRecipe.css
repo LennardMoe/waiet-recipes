@@ -1,0 +1,70 @@
+/* :root {
+    --bg-green: #b8e3c2;
+    --primary-red: #732e36;
+    --text-green: #b3ffc3;
+    --bright-red: #bf737c;
+    --dark-green: #397346;
+    --border: rgba(0, 0, 0, 0.8);
+    --border-bright: rgba(228, 224, 224, 0.805);
+    --dark: #0f0e0e;
+  } */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bright-red);
+  margin: 3rem 6rem;
+  min-width: fit-content;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.recipe__form {
+  background-color: var(--border-bright);
+  padding: 2rem;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form__header {
+  margin: 0.5rem 0 1rem 0;
+  text-decoration: dotted;
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+.recipe__info {
+}
+
+.recipe__info input {
+  margin: 1rem 0;
+  width: 90%;
+  padding: 0.2rem;
+}
+.addRowBtn {
+  width: 100%;
+  margin-top: 0.4rem;
+  text-decoration: none;
+  padding: 0.2rem;
+  background-color: aliceblue;
+  border: 1px solid var(--border-bright);
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.addRowBtn:hover {
+  opacity: 0.8;
+  border: 1px solid var(--bright-red);
+}
+
+.form__textarea {
+}
+
+.form__textarea h4 {
+  margin: 1rem 0;
+}

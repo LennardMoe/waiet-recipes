@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 
 import React from "react";
 
+import NewRecipe from "../components/NewRecipe";
+
 function Home() {
   return (
     <motion.div
@@ -12,6 +14,7 @@ function Home() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
+      <NewRecipe />
       <Veggie />
       <Popular />
     </motion.div>
