@@ -10,6 +10,7 @@ function TableRows({ rowsData, deleteTableRows, handleChange }) {
             onChange={(e) => handleChange(index, e)}
             name='amount'
             className='form-control'
+            required
           />
         </td>
         <td>
@@ -40,7 +41,7 @@ function TableRows({ rowsData, deleteTableRows, handleChange }) {
             className='btn btn-outline-danger'
             onClick={(e) => deleteTableRows(index, e)}
           >
-            x
+            Delete
           </button>
         </td>
       </tr>

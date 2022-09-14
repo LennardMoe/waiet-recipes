@@ -1,5 +1,12 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import {
+  addDoc,
+  deleteDoc,
+  getFirestore,
+  collection,
+  getDocs,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -14,3 +21,19 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+
+//init db service
+
+export const db = getFirestore(app);
+
+// collection ref
+
+const colRef = collection(db, "recipes");
+
+//get collection
+getDocs(colRef).then((snapshot) => {
+  let recipes = [];
+  snapshot.docs.forEach((doc) => {
+    recipes.push({ ...doc.data(), id: doc.id });
+  });
+});

@@ -3,7 +3,7 @@ import Popular from "../components/Popular";
 import { motion } from "framer-motion";
 
 import React from "react";
-
+import Test from "../components/Test";
 import NewRecipe from "../components/NewRecipe";
 
 function Home() {
@@ -15,6 +15,7 @@ function Home() {
       transition={{ duration: 0.5 }}
     >
       <NewRecipe />
+      <Test />
       <Veggie />
       <Popular />
     </motion.div>
