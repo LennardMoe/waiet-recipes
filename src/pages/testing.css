@@ -1,0 +1,101 @@
+.wrapper__newRecipe {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+
+.recipes h3 {
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+.recipe {
+  border: black solid 1px;
+  margin: 1rem;
+}
+
+.recipe__table {
+  padding: 1rem;
+}
+
+.recipes__ingredientsHeading {
+  margin: 0.5rem;
+  font-size: 18px;
+}
+
+.popup {
+  width: 70%;
+  border: black solid 1px;
+  background-color: var(--bright-red);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  margin: 0;
+  max-width: 100%;
+}
+
+.popup-inner label {
+  font-size: 18px;
+  font-weight: 600;
+  width: 100%;
+  margin: 0;
+}
+
+.form-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.form-desc {
+  width: 60%;
+  margin: 0;
+  height: 100px;
+  padding: 12px 10px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+
+.btn {
+  border: 1px solid var(--bg-green);
+  color: var(--white);
+  font-weight: 800;
+  padding: 0.6rem 0.8rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: var(--bright-red2);
+  cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 0.9;
+  background-color: #e64343;
+}
+.recipe__buttons {
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.form-ingredient {
+  width: 100%;
+  margin: 0.5rem;
+}

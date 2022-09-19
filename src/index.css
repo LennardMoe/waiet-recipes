@@ -12,10 +12,12 @@
   --primary-red: #732e36;
   --text-green: #b3ffc3;
   --bright-red: #bf737c;
+  --bright-red2: #ed4444;
   --dark-green: #397346;
   --border: rgba(0, 0, 0, 0.8);
   --border-bright: rgba(228, 224, 224, 0.805);
   --dark: #0f0e0e;
+  --white: rgb(246, 243, 243);
 }
 
 body {
