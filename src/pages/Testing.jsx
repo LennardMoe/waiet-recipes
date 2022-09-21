@@ -1,5 +1,6 @@
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
 import { useState, useEffect } from "react";
+import { UserAuth } from "../context/AuthContext";
 import {
   collection,
   onSnapshot,
@@ -9,28 +10,16 @@ import {
 } from "firebase/firestore";
 import "./testing.css";
 import TableRows from "./features/TableRows";
+import Fileupload from "../components/Fileupload";
+import { useNavigate } from "react-router-dom";
 
 function Testing() {
+  // const [user, setUser] = useState(auth.currentUser);
+  const navigate = useNavigate();
+  const { user } = UserAuth();
   const [recipes, setRecipes] = useState([]);
-  // const [rowsData, setRowsData] = useState([
-  //   {
-  //     amount: "",
-  //     unit: "",
-  //     ingredientName: "",
-  //   },
-  //   {
-  //     amount: "",
-  //     unit: "",
-  //     ingredientName: "",
-  //   },
-  //   {
-  //     amount: "",
-  //     unit: "",
-  //     ingredientName: "",
-  //   },
-  // ]);
-
   const [form, setForm] = useState({
+    createdBy: user.email,
     title: "",
     description: "",
     ingredients: [
@@ -50,7 +39,7 @@ function Testing() {
         ingredientName: "",
       },
     ],
-    steps: [],
+    steps: ["", "", ""],
   });
 
   const deleteTableRows = (index, e) => {
@@ -66,6 +55,8 @@ function Testing() {
   const recipesCollectionRef = collection(db, "recipes");
 
   useEffect(() => {
+    // setUser(auth.currentUser);
+
     onSnapshot(recipesCollectionRef, (snapshot) => {
       setRecipes(
         snapshot.docs.map((doc) => {
@@ -90,17 +81,6 @@ function Testing() {
       }
     });
     setRecipes(recipesClone);
-  };
-
-  const handleIngredient = (e, i) => {
-    const ingredientsClone = [...form.ingredients];
-
-    ingredientsClone[i] = e.target.value;
-
-    setForm({
-      ...form,
-      ingredients: ingredientsClone,
-    });
   };
 
   const handleChange = (index, e) => {
@@ -135,13 +115,6 @@ function Testing() {
     });
   };
 
-  const handleIngredientCount = () => {
-    setForm({
-      ...form,
-      ingredients: [...form.ingredients, ""],
-    });
-  };
-
   const addTableRows = (e) => {
     e.preventDefault();
     const rowsInput = {
@@ -149,7 +122,10 @@ function Testing() {
       unit: "",
       ingredientName: "",
     };
-    setForm([...form.ingredients, rowsInput]);
+    setForm({
+      ...form,
+      ingredients: [...form.ingredients, rowsInput],
+    });
   };
 
   const handleStepCount = () => {
@@ -166,34 +142,21 @@ function Testing() {
   const [popupActive, setPopupActive] = useState(false);
 
   const handleSubmit = (e) => {
-    // console.log(rowsData);
     e.preventDefault();
-
-    if (!form.title || !form.description || !form.ingredients || !form.steps) {
+    if (
+      !form.title ||
+      !form.description ||
+      // form.ingredients.unit ||
+      !form.ingredients ||
+      !form.steps
+    ) {
       alert("Please fill out all fields");
       return;
     }
 
     addDoc(recipesCollectionRef, form);
-
-    // setRowsData([
-    //   {
-    //     amount: " ",
-    //     unit: " ",
-    //     ingredientName: " ",
-    //   },
-    //   {
-    //     amount: " ",
-    //     unit: " ",
-    //     ingredientName: " ",
-    //   },
-    //   {
-    //     amount: " ",
-    //     unit: " ",
-    //     ingredientName: " ",
-    //   },
-    // ]);
     setForm({
+      createdBy: user.email,
       title: "",
       description: "",
       ingredients: [
@@ -213,18 +176,21 @@ function Testing() {
           ingredientName: "",
         },
       ],
-      steps: [],
+      steps: ["", "", ""],
     });
 
-    setPopupActive(false);
-    // console.log(rowsData);
+    // setPopupActive(false);
+    navigate("/MyRecipes");
   };
 
   return (
     <div className='wrapper__newRecipe'>
-      <h1>My recipes</h1>
-      <button onClick={() => setPopupActive(!popupActive)}>Add recipe</button>
-      <div className='recipes'>
+      {/* <h1>My recipes</h1> */}
+      {/* <button className='btn' onClick={() => setPopupActive(!popupActive)}>
+        Add recipe
+      </button> */}
+      {/* Exiting recipes show here */}
+      {/* <div className='recipes'>
         {recipes.map((recipe, i) => (
           <div className='recipe' key={recipe.id}>
             <h3>{recipe.title}</h3>
@@ -277,121 +243,109 @@ function Testing() {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
 
-      {popupActive && (
-        <div className='popup'>
-          <div className='popup-inner'>
-            <h2>Add a new recipe</h2>
-            <form onSubmit={handleSubmit}>
-              <div className='form-group'>
-                <label htmlFor=''>Title</label>
-                <input
-                  type='text'
-                  value={form.title}
-                  onChange={(e) => setForm({ ...form, title: e.target.value })}
-                />
-              </div>
-              <div className='form-group '>
-                <label htmlFor=''>Description</label>
-                <textarea
-                  type='text'
-                  value={form.description}
-                  onChange={(e) =>
-                    setForm({ ...form, description: e.target.value })
-                  }
-                  className='form-desc'
-                />
-              </div>
+      {/* Recipes end here */}
+      {/* Create new Recipe form */}
 
-              {/* Ingredients */}
+      <div className='newRecipe__wrapper'>
+        <div className='newRecipe__inner'>
+          <h2>Add a new recipe</h2>
+          <form className='newRecipe__form' onSubmit={handleSubmit}>
+            <div className='form__group'>
+              <label htmlFor='Title'>Title</label>
+              <input
+                type='text'
+                value={form.title}
+                onChange={(e) => setForm({ ...form, title: e.target.value })}
+                id='Title'
+              />
+            </div>
+            <div className='form__group '>
+              <label htmlFor='desc'>Description</label>
+              <textarea
+                type='text'
+                value={form.description}
+                onChange={(e) =>
+                  setForm({ ...form, description: e.target.value })
+                }
+                className='form__description'
+                id='desc'
+              />
+            </div>
 
-              <div className='form-group '>
+            {/* Ingredients */}
+            <div className='newIngredients__wrapper'>
+              <div className='form__group '>
                 <label htmlFor='Ingredients'>Ingredients</label>
-
-                <button type='button' onClick={addTableRows} className='btn'>
-                  {" "}
-                  Add Ingredient
-                </button>
               </div>
-              {/* <div className='form-ingredient'>
-                {form.ingredients.map((ingredient, i) => (
-                  
-                  <input
-                    id='Ingredients'
-                    type='text'
-                    key={i}
-                    value={ingredient}
-                    onChange={(e) => handleIngredient(e, i)}
+              <table className='form__table'>
+                <thead>
+                  <tr>
+                    <th>Ingredient Name</th>
+                    <th>Unit</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody className='table__body '>
+                  <TableRows
+                    rowsData={form.ingredients}
+                    deleteTableRows={deleteTableRows}
+                    handleChange={handleChange}
                   />
-                ))}
-              </div> */}
+                </tbody>
+              </table>
+              <button
+                type='button'
+                onClick={addTableRows}
+                className='btn btn__add'
+              >
+                Add Ingredient
+              </button>
+            </div>
 
-              <div className='col-sm-8'>
-                <table className='table'>
-                  <thead>
-                    <tr>
-                      <th>Amount</th>
-                      <th>Unit</th>
-                      <th>Ingredient Name</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <TableRows
-                      rowsData={form.ingredients}
-                      deleteTableRows={deleteTableRows}
-                      handleChange={handleChange}
-                    />
-                  </tbody>
-                </table>
-              </div>
+            {/* Ingredietns ends */}
+            {/* Steps Begin */}
 
-              {/* Ingredietns ends */}
+            <div className='form__group'>
+              <label>Steps</label>
 
-              <div className='form-group'>
-                <label htmlFor=''>Steps</label>
-
-                <button className='btn' type='button' onClick={handleStepCount}>
-                  {" "}
-                  Add Step
-                </button>
-              </div>
-
-              <div>
+              <div className='form__stepsGrid'>
                 {form.steps.map((step, i) => (
-                  <div>
+                  <div className='form__steps'>
                     <textarea
                       type='text'
                       key={i}
                       value={step}
                       onChange={(e) => handleStep(e, i)}
+                      className='steps__textarea'
+                      placeholder={`Step ${i + 1}`}
                     />
                     <button className='btn' type='button' onClick={deleteSteps}>
-                      {" "}
                       Delete
                     </button>
                   </div>
                 ))}
               </div>
+              <button
+                className='btn btn__add'
+                type='button'
+                onClick={handleStepCount}
+              >
+                Add Step
+              </button>
+            </div>
+            <Fileupload />
 
-              {/* Submit Close Buttons */}
-              <div className='recipe__buttons'>
-                <button className=' btn' type='submit'>
-                  {" "}
-                  Submit
-                </button>
-                <button
-                  type='button'
-                  className='remove btn'
-                  onClick={() => setPopupActive(false)}
-                >
-                  Close
-                </button>
-              </div>
-            </form>
-          </div>
+            {/* Submit  Button */}
+            <div className='recipe__buttons'>
+              <button className=' btn__submit btn' type='submit'>
+                Submit
+              </button>
+            </div>
+          </form>
         </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -400,30 +354,4 @@ export default Testing;
 
 //https://www.youtube.com/watch?v=Zr0i1-bCFHI&t=355s
 {
-  /* <table className='table'>
-                <thead>
-                  <tr>
-                    <th>Amount</th>
-                    <th>Unit</th>
-                    <th>Ingredient Name</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <TableRows
-                    rowsData={rowsData}
-                    deleteTableRows={deleteTableRows}
-                    handleChange={handleChange}
-                  />
-                </tbody>
-              </table> */
-}
-
-{
-  /* <td key={i}>{ingredientName}</td> */
-}
-{
-  /* <td key={i}>{amount}</td> */
-}
-{
-  /* <td key={i}>{unit}</td> */
 }

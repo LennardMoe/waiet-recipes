@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-function Test() {
+function NewRecipe() {
   return (
     <Wrapper>
-      <Link to={"/test/"}>
-        <Button> Add new recipe</Button>
+      <Link to={"/MyRecipes/"}>
+        <Button> My Recipes</Button>
       </Link>
     </Wrapper>
   );
@@ -34,4 +34,4 @@ const Button = styled.button`
     opacity: 0.9;
   }
 `;
-export default Test;
+export default NewRecipe;

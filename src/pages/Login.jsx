@@ -25,9 +25,6 @@ function Login() {
     }
   };
 
-  // const login = async () => {};
-  // const logout = () => {};
-
   return (
     <div className='form__wrapper'>
       <form className='form'>

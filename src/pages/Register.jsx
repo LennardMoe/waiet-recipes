@@ -6,31 +6,47 @@ import { useState } from "react";
 import "./Register.css";
 import { auth } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
+import { UserAuth } from "../context/AuthContext";
 
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [user, setUser] = useState({});
+  const [username, setUsername] = useState("");
+  // const [user, setUser] = useState({});
   const navigate = useNavigate();
+  const { user, signUp } = UserAuth();
 
   // onAuthStateChanged(auth, (currentUser) => {
   //   setUser(currentUser);
   // });
 
+  // const register = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const user = await createUserWithEmailAndPassword(auth, email, password);
+  //     navigate("/");
+  //   } catch (error) {
+  //     setError(error.message);
+  //     console.log(error.message);
+  //   }
+  // };
+
+  // const login = async () => {};
+  // const logout = () => {};
+
   const register = async (e) => {
     e.preventDefault();
+    setError("");
     try {
-      const user = await createUserWithEmailAndPassword(auth, email, password);
-      navigate("/");
+      await signUp(email, password, username);
+
+      // navigate("/");
     } catch (error) {
       setError(error.message);
       console.log(error.message);
     }
   };
-
-  // const login = async () => {};
-  // const logout = () => {};
 
   return (
     <div className='form__wrapper'>
@@ -53,6 +69,10 @@ function Register() {
             type='password'
             onChange={(e) => setPassword(e.target.value)}
           />
+        </label>
+        <label htmlFor='Username'>
+          <h4> Username</h4>
+          <input type='text' onChange={(e) => setUsername(e.target.value)} />
         </label>
         <button onClick={register} type='submit'>
           Register
