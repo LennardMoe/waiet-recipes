@@ -1,18 +1,26 @@
 import { useState } from "react";
 import { storage } from "../firebase";
-import { ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
+import { useEffect } from "react";
 
-function Fileupload() {
+function Fileupload({ uploadImage }) {
   const [imageUpload, setImageUpload] = useState(null);
+  const [imgList, setImageList] = useState([]);
 
-  const uploadImage = () => {
-    if (imageUpload == null) return;
-    const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
-    uploadBytes(imageRef, imageUpload).then(() => {
-      alert("Image Uploaded");
-    });
-  };
+  // const uploadImage = () => {
+  //   if (imageUpload == null) return;
+  //   const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
+  //   uploadBytes(imageRef, imageUpload).then((snaphsot) => {
+  //     getDownloadURL(snaphsot.ref).then((url) => {
+  //       setImageList((prev) => [...prev, url]);
+  //     });
+
+  //     alert("Image Uploaded");
+  //   });
+  // };
+
+  // const saveImage = () => {};
 
   return (
     <div>
@@ -24,7 +32,11 @@ function Fileupload() {
         name='fileUpload'
         id='fileUpload'
       />
-      <button onClick={uploadImage}>Upload Image</button>
+
+      <button onClick={(imageUpload) => uploadImage(imageUpload)}>
+        Upload Image
+      </button>
+      {/* <button onClick={console.log(imgList.pop())}> Click for url</button> */}
     </div>
   );
 }

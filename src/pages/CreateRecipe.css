@@ -9,7 +9,7 @@
     --dark: #0f0e0e;
   } */
 
-.wrapper {
+/* .wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -67,4 +67,4 @@
 
 .form__textarea h4 {
   margin: 1rem 0;
-}
+} */

@@ -1,4 +1,4 @@
-import { auth, db } from "../firebase";
+import { db, storage } from "../firebase";
 import { useState, useEffect } from "react";
 import { UserAuth } from "../context/AuthContext";
 import {
@@ -7,19 +7,28 @@ import {
   doc,
   addDoc,
   deleteDoc,
+  getDoc,
 } from "firebase/firestore";
 import "./testing.css";
 import TableRows from "./features/TableRows";
 import Fileupload from "../components/Fileupload";
 import { useNavigate } from "react-router-dom";
+import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid";
 
 function Testing() {
-  // const [user, setUser] = useState(auth.currentUser);
+  const [url, setUrl] = useState("");
+  const [imgList, setImageList] = useState([]);
+  const [imageUpload, setImageUpload] = useState(null);
   const navigate = useNavigate();
   const { user } = UserAuth();
-  const [recipes, setRecipes] = useState([]);
+  const [userEmail, setUserEmail] = useState("");
+  // const [imgList, setImageList] = useState("");
+  const imageListRef = ref(storage, "images/");
   const [form, setForm] = useState({
+    // url: url,
     createdBy: user.email,
+    date: new Date().toLocaleString(),
     title: "",
     description: "",
     ingredients: [
@@ -52,36 +61,45 @@ function Testing() {
     });
   };
 
-  const recipesCollectionRef = collection(db, "recipes");
+  useEffect(() => {
+    async function Username() {
+      const docRef = doc(db, "users", user.email);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setForm({
+          ...form,
+          username: docSnap.data().username,
+        });
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    }
+    Username();
+  }, [form]);
 
   useEffect(() => {
-    // setUser(auth.currentUser);
+    const uploadImage = () => {
+      if (imageUpload == null) return;
+      const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
+      uploadBytes(imageRef, imageUpload).then((snapshot) => {
+        getDownloadURL(snapshot.ref).then((url) => {
+          console.log(url);
+          setForm({
+            ...form,
+            img: url,
+          });
+          setImageList((prev) => [...prev, url]);
+        });
 
-    onSnapshot(recipesCollectionRef, (snapshot) => {
-      setRecipes(
-        snapshot.docs.map((doc) => {
-          return {
-            id: doc.id,
-            viewing: false,
-            ...doc.data(),
-          };
-        })
-      );
-    });
-  }, []);
+        alert("Image Uploaded");
+      });
+    };
+    imageUpload && uploadImage();
+  }, [imageUpload]);
 
-  const handleView = (id) => {
-    const recipesClone = [...recipes];
-
-    recipesClone.forEach((recipe) => {
-      if (recipe.id === id) {
-        recipe.viewing = !recipe.viewing;
-      } else {
-        recipe.viewing = false;
-      }
-    });
-    setRecipes(recipesClone);
-  };
+  const recipesCollectionRef = collection(db, "recipes");
 
   const handleChange = (index, e) => {
     const { name, value } = e.target;
@@ -135,12 +153,6 @@ function Testing() {
     });
   };
 
-  const removeRecipe = (id) => {
-    deleteDoc(doc(db, "recipes", id));
-  };
-
-  const [popupActive, setPopupActive] = useState(false);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
@@ -156,7 +168,9 @@ function Testing() {
 
     addDoc(recipesCollectionRef, form);
     setForm({
+      // url: url,
       createdBy: user.email,
+      date: new Date().toLocaleString(),
       title: "",
       description: "",
       ingredients: [
@@ -178,76 +192,12 @@ function Testing() {
       ],
       steps: ["", "", ""],
     });
-
-    // setPopupActive(false);
     navigate("/MyRecipes");
   };
 
   return (
     <div className='wrapper__newRecipe'>
-      {/* <h1>My recipes</h1> */}
-      {/* <button className='btn' onClick={() => setPopupActive(!popupActive)}>
-        Add recipe
-      </button> */}
-      {/* Exiting recipes show here */}
-      {/* <div className='recipes'>
-        {recipes.map((recipe, i) => (
-          <div className='recipe' key={recipe.id}>
-            <h3>{recipe.title}</h3>
-            <div>
-              <h4>How to?</h4>
-              <p dangerouslySetInnerHTML={{ __html: recipe.description }}></p>
-            </div>
-            {recipe.viewing && (
-              <div>
-                <h5 className='recipes__ingredientsHeading'>Ingredients</h5>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Ingredient Name</th>
-                      <th>Amount</th>
-                      <th>Unit</th>
-                    </tr>
-                  </thead>
-                  {recipe.ingredients.map(
-                    ({ ingredientName, amount, unit }, i) => (
-                      <tbody>
-                        <tr>
-                          <td key={i}>{ingredientName}</td>
-                          <td key={i}>{amount}</td>
-                          <td key={i}>{unit}</td>
-                        </tr>
-                      </tbody>
-                    )
-                  )}
-                </table>
-                <h4>Steps</h4>
-                <ol>
-                  {recipe.steps.map((step, i) => (
-                    <li key={i}>{step}</li>
-                  ))}
-                </ol>
-              </div>
-            )}
-            <div className='recipe__btn'>
-              <button onClick={() => handleView(recipe.id)}>
-                View {recipe.viewing ? "less" : "more"}
-              </button>
-              <button
-                onClick={() => removeRecipe(recipe.id)}
-                className='recipe__btnRemove'
-              >
-                {" "}
-                Remove{" "}
-              </button>
-            </div>
-          </div>
-        ))}
-      </div> */}
-
-      {/* Recipes end here */}
       {/* Create new Recipe form */}
-
       <div className='newRecipe__wrapper'>
         <div className='newRecipe__inner'>
           <h2>Add a new recipe</h2>
@@ -335,7 +285,24 @@ function Testing() {
                 Add Step
               </button>
             </div>
-            <Fileupload />
+            {/* <Fileupload uploadImage={uploadImage} /> */}
+            <div>
+              <input
+                type='file'
+                onChange={(event) => {
+                  setImageUpload(event.target.files[0]);
+                }}
+                name='fileUpload'
+                id='fileUpload'
+              />
+
+              <button
+              // onClick={uploadImage}
+              >
+                Upload Image
+              </button>
+              {/* <button onClick={console.log(imgList.pop())}> Click for url</button> */}
+            </div>
 
             {/* Submit  Button */}
             <div className='recipe__buttons'>
@@ -353,5 +320,3 @@ function Testing() {
 export default Testing;
 
 //https://www.youtube.com/watch?v=Zr0i1-bCFHI&t=355s
-{
-}

@@ -49,8 +49,8 @@ function Register() {
   };
 
   return (
-    <div className='form__wrapper'>
-      <form className='form'>
+    <div className='register__form__wrapper'>
+      <form className='register__form'>
         {error ? (
           <p>
             <strong>Error: </strong>Invalid Password or E-Mail{" "}
