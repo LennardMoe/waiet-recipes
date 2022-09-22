@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../firebase";
 import Search from "./Search";
+import { UserAuth } from "../context/AuthContext";
 function Navbar() {
   const [user, setUser] = useState({});
 

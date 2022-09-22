@@ -1,29 +1,66 @@
 import { useState } from "react";
-import AddDeleteTableRows from "./features/AddDeleteTableRows";
+// import AddDeleteTableRows from "./features/AddDeleteTableRows";
 import "./CreateRecipe.css";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import TableRows from "./features/TableRows";
 
 function CreateRecipe() {
   const [name, setName] = useState("");
   const [extra, setExtra] = useState("");
-  const [quantity, setQuantity] = useState("");
-  const [ingredientName, setingeredientName] = useState("");
-  const [unit, setUnit] = useState("");
   const [description, setDescription] = useState("");
-
-  const dataRecipe = [
+  const [rowsData, setRowsData] = useState([
     {
+      amount: "",
+      unit: "",
+      ingredientName: "",
+    },
+    {
+      amount: "",
+      unit: "",
+      ingredientName: "",
+    },
+    {
+      amount: "",
+      unit: "",
+      ingredientName: "",
+    },
+  ]);
+
+  const addTableRows = (e) => {
+    e.preventDefault();
+    const rowsInput = {
+      amount: "",
+      unit: "",
+      ingredientName: "",
+    };
+    setRowsData([...rowsData, rowsInput]);
+  };
+  const deleteTableRows = (index, e) => {
+    const rows = [...rowsData];
+    e.preventDefault();
+    rows.splice(index, 1);
+    setRowsData(rows);
+  };
+
+  const handleChange = (index, e) => {
+    const { name, value } = e.target;
+    const rowsInput = [...rowsData];
+    e.preventDefault();
+    rowsInput[index][name] = value;
+    setRowsData(rowsInput);
+  };
+
+  const recipeData = async (e) => {
+    e.preventDefault();
+
+    await setDoc(doc(db, "recipes", name), {
       name: name,
       extraInfo: extra,
-      ingredients: [
-        {
-          quantity: quantity,
-          unit: unit,
-          ingredientName: ingredientName,
-        },
-      ],
+      ingredients: rowsData,
       description: description,
-    },
-  ];
+    });
+  };
 
   return (
     <div className='wrapper'>
@@ -49,7 +86,33 @@ function CreateRecipe() {
             />
           </label>
         </div>
-        <AddDeleteTableRows />
+
+        <div className='container'>
+          <div className='row'>
+            <div className='col-sm-8'>
+              <table className='table'>
+                <thead>
+                  <tr>
+                    <th>Amount</th>
+                    <th>Unit</th>
+                    <th>Ingredient Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <TableRows
+                    rowsData={rowsData}
+                    deleteTableRows={deleteTableRows}
+                    handleChange={handleChange}
+                  />
+                </tbody>
+              </table>
+            </div>
+            <button className='addRowBtn' onClick={addTableRows}>
+              Add Row
+            </button>
+          </div>
+        </div>
+
         <div className='form__textarea'>
           <label htmlFor='description'>
             <h4>How is it done?</h4>
@@ -62,6 +125,7 @@ function CreateRecipe() {
             ></textarea>
           </label>
         </div>
+        <button onClick={recipeData}> Submit your recipe!</button>
       </form>
     </div>
   );

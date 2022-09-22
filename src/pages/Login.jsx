@@ -25,12 +25,9 @@ function Login() {
     }
   };
 
-  // const login = async () => {};
-  // const logout = () => {};
-
   return (
-    <div className='form__wrapper'>
-      <form className='form'>
+    <div className='register__form__wrapper'>
+      <form className='register__form'>
         <label htmlFor='E-Mail'>
           <h4> E-Mail</h4>
           <input type='text' onChange={(e) => setEmail(e.target.value)} />
