@@ -12,6 +12,17 @@ function TableRows({ rowsData, deleteTableRows, handleChange }) {
             className='form-control'
           />
         </td>
+
+        <td>
+          <input
+            type='text'
+            value={amount}
+            onChange={(e) => handleChange(index, e)}
+            name='amount'
+            className='form-control'
+            required
+          />
+        </td>
         <td>
           <select
             name='unit'
@@ -28,17 +39,6 @@ function TableRows({ rowsData, deleteTableRows, handleChange }) {
             <option id='6'>g</option>
             <option id='7'>KG</option>
           </select>
-        </td>
-
-        <td>
-          <input
-            type='text'
-            value={amount}
-            onChange={(e) => handleChange(index, e)}
-            name='amount'
-            className='form-control'
-            required
-          />
         </td>
         <td>
           <button

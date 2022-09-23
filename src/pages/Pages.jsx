@@ -7,8 +7,9 @@ import Recipe from "./Recipe";
 import Register from "./Register";
 import { AnimatePresence } from "framer-motion";
 import Login from "./Login";
+// import CreateRecipe from "./CreateRecipe";
 import CreateRecipe from "./CreateRecipe";
-import Testing from "./Testing";
+// import Testing from "./Testing";
 import MyRecipes from "./MyRecipes";
 
 function Pages() {
@@ -24,8 +25,8 @@ function Pages() {
         <Route path='/recipe/:name' element={<Recipe />} />
         <Route path='/Register' element={<Register />} />
         <Route path='/Login' element={<Login />} />
-        <Route path='/createrecipe' element={<CreateRecipe />} />
-        <Route path='/test' element={<Testing />} />
+        {/* <Route path='/createrecipe' element={<CreateRecipe />} /> */}
+        <Route path='/createRecipe' element={<CreateRecipe />} />
         <Route path='/myRecipes' element={<MyRecipes />} />
       </Routes>
     </AnimatePresence>

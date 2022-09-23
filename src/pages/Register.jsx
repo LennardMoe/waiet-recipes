@@ -61,7 +61,10 @@ function Register() {
         )}
         <label htmlFor='E-Mail'>
           <h4> E-Mail</h4>
-          <input type='text' onChange={(e) => setEmail(e.target.value)} />
+          <input
+            type='text'
+            onChange={(e) => setEmail(e.target.value.toLowerCase())}
+          />
         </label>
         <label htmlFor='Password'>
           <h4> Password</h4>

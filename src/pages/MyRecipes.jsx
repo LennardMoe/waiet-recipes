@@ -9,12 +9,13 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { UserAuth } from "../context/AuthContext";
+import { getStorage, ref, deleteObject } from "firebase/storage";
 
 function MyRecipes() {
-  // const { user } = UserAuth();
   const { user } = UserAuth();
   const [recipes, setRecipes] = useState([]);
   const recipesCollectionRef = collection(db, "recipes");
+  const storage = getStorage();
 
   const [imgList, setImageList] = useState([]);
   // const imageListRef = ref(storage, "images/");
@@ -68,7 +69,6 @@ function MyRecipes() {
             <div className='myRecipe' key={recipe.id}>
               <h3>{recipe.title}</h3>
               <div>
-                <h4>How to?</h4>
                 <p dangerouslySetInnerHTML={{ __html: recipe.description }}></p>
                 <div className='recipe__imgContainer'>
                   <img
