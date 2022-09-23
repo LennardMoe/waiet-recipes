@@ -3,8 +3,8 @@ import Popular from "../components/Popular";
 import { motion } from "framer-motion";
 import MyRecipes from "../components/MyRecipesComponent";
 import React from "react";
-import Test from "../components/Test";
-import NewRecipe from "../components/NewRecipe";
+import NewRecipe from "../components/CreateRecipeComponent";
+// import NewRecipe from "../components/NewRecipe";
 import styled from "styled-components";
 
 function Home() {
@@ -18,7 +18,7 @@ function Home() {
       {/* <NewRecipe /> */}
       <Styling>
         <div className='Test'>
-          <Test />
+          <NewRecipe />
         </div>
         <MyRecipes />
       </Styling>

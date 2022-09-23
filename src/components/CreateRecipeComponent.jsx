@@ -4,7 +4,7 @@ import styled from "styled-components";
 function Test() {
   return (
     <Wrapper>
-      <Link to={"/test/"}>
+      <Link to={"/createRecipe/"}>
         <Button> Add new recipe</Button>
       </Link>
     </Wrapper>
