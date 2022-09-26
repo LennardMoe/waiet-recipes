@@ -21,15 +21,6 @@ function MyRecipes() {
   // const imageListRef = ref(storage, "images/");
 
   useEffect(() => {
-    // listAll(imageListRef).then((response) => {
-    //   // console.log(response);
-    //   response.items.forEach((item) => {
-    //     getDownloadURL(item).then((url) => {
-    //       setImageList((prev) => [...prev, url]);
-    //     });
-    //   });
-    // });
-
     onSnapshot(recipesCollectionRef, (snapshot) => {
       setRecipes(
         snapshot.docs.map((doc) => {

@@ -1,5 +1,6 @@
 import React from "react";
 import Home from "./Home";
+import HomeTest from "./HomeTest";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Cuisine from "./Cuisine";
 import Searched from "./Searched";
@@ -11,6 +12,7 @@ import Login from "./Login";
 import CreateRecipe from "./CreateRecipe";
 // import Testing from "./Testing";
 import MyRecipes from "./MyRecipes";
+import RecipeTesting from "./RecipeTesting";
 
 function Pages() {
   const location = useLocation();
@@ -20,9 +22,11 @@ function Pages() {
     <AnimatePresence exitBeforeEnter>
       <Routes location={location} key={location.pathname}>
         <Route path='/' element={<Home />} />
+        <Route path='/homeTest' element={<HomeTest />} />
         <Route path='/cuisine/:type' element={<Cuisine />} />
         <Route path='/searched/:search' element={<Searched />} />
         <Route path='/recipe/:name' element={<Recipe />} />
+        <Route path='/recipeTesting/:name' element={<RecipeTesting />} />
         <Route path='/Register' element={<Register />} />
         <Route path='/Login' element={<Login />} />
         {/* <Route path='/createrecipe' element={<CreateRecipe />} /> */}

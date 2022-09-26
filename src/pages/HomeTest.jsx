@@ -6,7 +6,7 @@ import React from "react";
 import NewRecipe from "../components/CreateRecipeComponent";
 // import NewRecipe from "../components/NewRecipe";
 import styled from "styled-components";
-import TestBtn from "../components/TestBtn";
+import AllRecipes from "../components/AllRecipes";
 
 function Home() {
   return (
@@ -16,16 +16,13 @@ function Home() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      {/* <NewRecipe /> */}
       <Styling>
         <div className='Test'>
           <NewRecipe />
         </div>
         <MyRecipes />
-        <TestBtn />
       </Styling>
-      <Veggie />
-      <Popular />
+      <AllRecipes />
     </motion.div>
   );
 }
