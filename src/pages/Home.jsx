@@ -7,8 +7,10 @@ import NewRecipe from "../components/CreateRecipeComponent";
 // import NewRecipe from "../components/NewRecipe";
 import styled from "styled-components";
 import TestBtn from "../components/TestBtn";
+import { UserAuth } from "../context/AuthContext";
 
 function Home() {
+  const { user } = UserAuth();
   return (
     <motion.div
       animate={{ opacity: 1 }}
@@ -21,7 +23,7 @@ function Home() {
         <div className='Test'>
           <NewRecipe />
         </div>
-        <MyRecipes />
+        {user ? <MyRecipes /> : ""}
         <TestBtn />
       </Styling>
       <Veggie />

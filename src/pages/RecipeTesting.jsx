@@ -1,117 +1,89 @@
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { auth, db, storage } from "../firebase";
-import {
-  collection,
-  onSnapshot,
-  doc,
-  addDoc,
-  deleteDoc,
-} from "firebase/firestore";
+import { db } from "../firebase";
 
-function Recipe() {
+import { doc, getDoc } from "firebase/firestore";
+
+import "./RecipeTesting.css";
+
+function RecipeTesting() {
   let params = useParams();
-  const [details, setDetails] = useState({});
   const [activeTab, setActiveTab] = useState("instructions");
-
-  const { user } = UserAuth();
-  const [recipes, setRecipes] = useState([]);
-  const recipesCollectionRef = collection(db, "recipes");
+  const [recipe, setRecipe] = useState([]);
 
   useEffect(() => {
-    onSnapshot(recipesCollectionRef, (snapshot) => {
-      setRecipes(
-        snapshot.docs.map((doc) => {
-          return {
-            id: doc.id,
-            viewing: false,
-            ...doc.data(),
-          };
-        })
-      );
-    });
+    async function getRecipe() {
+      const docRef = doc(db, "recipes", params.test);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+
+        setRecipe(docSnap.data());
+      } else {
+        console.log("No such document!");
+      }
+    }
+    getRecipe();
   }, []);
 
-  const fetchDetails = async () => {
-    const data = await fetch(setDetails(recipes.id.params.name));
-  };
-
-  useEffect(() => {
-    fetchDetails();
-  }, [params.title]);
-
   return (
-    <DetailWrapper>
-      <div>
-        <h2>{details.title}</h2>
-        <img src={details.image} alt='' />
-      </div>
-      <Info>
-        <Button
-          className={activeTab === "instructions" ? "active" : ""}
+    <div className='recipeInfo__wrapper'>
+      <div className='heading__info'>
+        <h2>{recipe.title}</h2>
+        <button
+          className={`heading__btn ${
+            activeTab === "instructions" ? "active" : ""
+          }`}
           onClick={() => setActiveTab("instructions")}
         >
           Instructions
-        </Button>
-        <Button
-          className={activeTab === "ingredients" ? "active" : ""}
+        </button>
+        <button
+          className={`heading__btn ${
+            activeTab === "ingredients" ? "active" : ""
+          }`}
           onClick={() => setActiveTab("ingredients")}
         >
           Ingredients
-        </Button>
+        </button>
+      </div>
+      <div className='recipeInfo__infoWrapper'>
+        <img src={recipe.img} alt='' />
         {activeTab === "instructions" && (
-          <div>
-            <h3 dangerouslySetInnerHTML={{ __html: details.summary }}></h3>
-            <h3 dangerouslySetInnerHTML={{ __html: details.instructions }}></h3>
+          <div className='recipeInfo__info'>
+            <p dangerouslySetInnerHTML={{ __html: recipe.description }}></p>
+            <ol>
+              {recipe.steps?.map((step, i) => (
+                <li key={i}>{step}</li>
+              ))}
+            </ol>
           </div>
         )}
-        {activeTab === "ingredients" && (
-          <ul>
-            {details.extendedIngredients.map((ingerdient) => (
-              <li key={ingerdient.id}> {ingerdient.original}</li>
-            ))}
-          </ul>
-        )}
-      </Info>
-    </DetailWrapper>
+        <div className='recipeInfo__info'>
+          {activeTab === "ingredients" && (
+            <table>
+              <thead>
+                <tr>
+                  <th>Ingredient Name</th>
+                  <th>Amount</th>
+                  <th>Unit</th>
+                </tr>
+              </thead>
+              {recipe.ingredients.map(({ ingredientName, amount, unit }, i) => (
+                <tbody key={i}>
+                  <tr>
+                    <td>{ingredientName}</td>
+                    <td>{amount}</td>
+                    <td>{unit}</td>
+                  </tr>
+                </tbody>
+              ))}
+            </table>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 
-const DetailWrapper = styled.div`
-  margin-top: 10rem;
-  margin-bottom: 5rem;
-  display: flex;
-  .active {
-    background: linear-gradient(35deg, #494949, #313131);
-    color: white;
-  }
-  h2 {
-    margin-bottom: 2rem;
-  }
-  li {
-    font-size: 1.2rem;
-    line-height: 2.5rem;
-  }
-  ul {
-    margin-top: 2rem;
-  }
-
-  h3 {
-    font-size: 1.2rem;
-    line-height: 2rem;
-  }
-`;
-
-const Button = styled.button`
-  padding: 1rem 2rem;
-  color: #313131;
-  background: white;
-  border: 2px solid black;
-  font-weight: 600;
-  margin-right: 2rem;
-`;
-const Info = styled.div`
-  margin-left: 5rem;
-`;
-export default Recipe;
+export default RecipeTesting;

@@ -1,27 +1,21 @@
 import { db, storage } from "../firebase";
 import { useState, useEffect } from "react";
 import { UserAuth } from "../context/AuthContext";
-import {
-  collection,
-  onSnapshot,
-  doc,
-  addDoc,
-  deleteDoc,
-  getDoc,
-} from "firebase/firestore";
+import { collection, doc, addDoc, getDoc } from "firebase/firestore";
 import "./createRecipe.css";
 import TableRows from "./features/TableRows";
-import Fileupload from "../components/Fileupload";
 import { useNavigate } from "react-router-dom";
-import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
+import Checkboxes from "../components/Checkboxes";
 
-function Testing() {
+function CreateRecipe() {
   const [imgList, setImageList] = useState([]);
   const [imageUpload, setImageUpload] = useState(null);
   const navigate = useNavigate();
   const { user } = UserAuth();
   const imageListRef = ref(storage, "images/");
+  const [categories, setCategories] = useState([]);
   const [form, setForm] = useState({
     // url: url,
     createdBy: user.email,
@@ -46,6 +40,7 @@ function Testing() {
       },
     ],
     steps: ["", "", ""],
+    // categories: [],
   });
 
   const deleteTableRows = (index, e) => {
@@ -57,6 +52,14 @@ function Testing() {
       ingredients: rows,
     });
   };
+
+  useEffect(() => {
+    setForm({
+      ...form,
+      categories: categories,
+    });
+    console.log(categories);
+  }, [categories]);
 
   useEffect(() => {
     async function Username() {
@@ -156,6 +159,7 @@ function Testing() {
     if (
       !form.title ||
       !form.description ||
+      !form.categories ||
       // form.ingredients.unit ||
       !form.ingredients ||
       !form.steps
@@ -189,6 +193,7 @@ function Testing() {
         },
       ],
       steps: ["", "", ""],
+      // categories: [],
     });
     navigate("/MyRecipes");
   };
@@ -207,6 +212,7 @@ function Testing() {
                 value={form.title}
                 onChange={(e) => setForm({ ...form, title: e.target.value })}
                 id='Title'
+                placeholder='Tomato soup, Egg salad, Roastbeef...'
               />
             </div>
             <div className='form__group '>
@@ -221,7 +227,13 @@ function Testing() {
                 id='desc'
               />
             </div>
-
+            {/*Checkboxes  */}
+            <div className='form__group'>
+              <Checkboxes
+                setCategories={setCategories}
+                categories={categories}
+              />
+            </div>
             {/* Ingredients */}
             <div className='newIngredients__wrapper'>
               <div className='form__group '>
@@ -293,13 +305,6 @@ function Testing() {
                 name='fileUpload'
                 id='fileUpload'
               />
-
-              <button
-              // onClick={uploadImage}
-              >
-                Upload Image
-              </button>
-              {/* <button onClick={console.log(imgList.pop())}> Click for url</button> */}
             </div>
 
             {/* Submit  Button */}
@@ -315,6 +320,6 @@ function Testing() {
   );
 }
 
-export default Testing;
+export default CreateRecipe;
 
 //https://www.youtube.com/watch?v=Zr0i1-bCFHI&t=355s

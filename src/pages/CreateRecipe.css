@@ -163,3 +163,40 @@
   width: 100%;
   margin: 0.5rem;
 }
+
+.form__categories {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form__categories li {
+  text-decoration: none;
+  list-style: none;
+  padding: 1rem;
+  /* background-color: red; */
+  margin: 0 0.2rem;
+}
+
+.categories__inputs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 15px;
+  font-weight: 800;
+
+  /* margin: auto; */
+}
+
+.categories__inputs input {
+  width: 20px;
+  height: 20px;
+}
+
+.categories__inputs label {
+  /* margin-right: 15px; */
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 10px;
+}

@@ -9,6 +9,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { UserAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 function AllRecipes() {
   const { user } = UserAuth();
   const [recipes, setRecipes] = useState([]);
@@ -28,19 +29,35 @@ function AllRecipes() {
     });
   }, []);
 
-  console.log(recipes);
+  // console.log(recipes);
 
   return (
-    <div className='allRecipes__wrapper'>
-      {recipes.map((recipe) => (
-        <div className='allRecipes__recipes' key={recipe.id}>
-          <div className='test'>
-            <img src={recipe.img} alt='' />
-          </div>
-          <h3>{recipe.title}</h3>
-        </div>
-      ))}
-    </div>
+    <>
+      <div className='allRecipes__wrapper'>
+        {recipes.map((recipe) => (
+          <Link key={recipe.id} to={"/recipeTesting/" + recipe.id}>
+            <div className='allRecipes__recipes'>
+              <div className='test'>
+                <img src={recipe.img} alt={recipe.title} />
+              </div>
+              <h3>{recipe.title}</h3>
+            </div>
+          </Link>
+        ))}
+      </div>
+      <div className='allRecipes__wrapper'>
+        {recipes.map((recipe) => (
+          <Link key={recipe.id} to={"/question/" + recipe.id}>
+            <div className='allRecipes__recipes'>
+              <div className='test'>
+                <img src={recipe.img} alt={recipe.title} />
+              </div>
+              <h3>{recipe.title}</h3>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </>
   );
 }
 
