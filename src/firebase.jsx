@@ -25,14 +25,14 @@ export const db = getFirestore(app);
 
 export const storage = getStorage(app);
 
-// collection ref
+// // collection ref
 
-const colRef = collection(db, "recipes");
+// const colRef = collection(db, "recipes");
 
-//get collection
-getDocs(colRef).then((snapshot) => {
-  let recipes = [];
-  snapshot.docs.forEach((doc) => {
-    recipes.push({ ...doc.data(), id: doc.id });
-  });
-});
+// //get collection
+// getDocs(colRef).then((snapshot) => {
+//   let recipes = [];
+//   snapshot.docs.forEach((doc) => {
+//     recipes.push({ ...doc.data(), id: doc.id });
+//   });
+// });
