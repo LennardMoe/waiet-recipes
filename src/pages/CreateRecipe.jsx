@@ -41,6 +41,7 @@ function CreateRecipe() {
       },
     ],
     steps: ["", "", ""],
+    source: "",
     // categories: [],
   });
 
@@ -194,6 +195,7 @@ function CreateRecipe() {
         },
       ],
       steps: ["", "", ""],
+      source: "",
       // categories: [],
     });
     navigate("/MyRecipes");
@@ -311,6 +313,16 @@ function CreateRecipe() {
                   id='fileUpload'
                 />
               </label>
+            </div>
+            <div className='form__group'>
+              <label htmlFor='source'>Original Source</label>
+              <input
+                type='text'
+                value={form.source}
+                onChange={(e) => setForm({ ...form, source: e.target.value })}
+                id='source'
+                placeholder='www.chefkoch.de/...'
+              />
             </div>
 
             {/* Submit  Button */}
