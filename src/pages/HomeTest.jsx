@@ -6,7 +6,7 @@ import React from "react";
 import NewRecipe from "../components/CreateRecipeComponent";
 // import NewRecipe from "../components/NewRecipe";
 import styled from "styled-components";
-import TestBtn from "../components/TestBtn";
+// import TestBtn from "../components/TestBtn";
 import { UserAuth } from "../context/AuthContext";
 
 function Home() {
@@ -24,7 +24,7 @@ function Home() {
           <NewRecipe />
         </div>
         {user ? <MyRecipes /> : ""}
-        <TestBtn />
+        {/* <TestBtn /> */}
       </Styling>
       <Veggie />
       <Popular />
