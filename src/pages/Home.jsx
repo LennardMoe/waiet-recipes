@@ -1,4 +1,4 @@
-import Veggie from "../components/Veggie";
+// import Veggie from "../archive/Veggie";
 import Popular from "../components/Popular";
 import { motion } from "framer-motion";
 import MyRecipes from "../components/MyRecipesComponent";

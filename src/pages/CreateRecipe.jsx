@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { UserAuth } from "../context/AuthContext";
 import { collection, doc, addDoc, getDoc } from "firebase/firestore";
 import "./createRecipe.css";
-import TableRows from "./features/TableRows";
+import TableRows from "../util/TableRows";
 import { useNavigate } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { v4 } from "uuid";

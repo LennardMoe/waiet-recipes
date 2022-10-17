@@ -10,11 +10,13 @@ function RecipeTesting() {
   let params = useParams();
   const [activeTab, setActiveTab] = useState("instructions");
   const [recipe, setRecipe] = useState([]);
+  const [date, setDate] = useState("");
 
   useEffect(() => {
     async function getRecipe() {
       const docRef = doc(db, "recipes", params.test);
       const docSnap = await getDoc(docRef);
+
       if (docSnap.exists()) {
         console.log("Document data:", docSnap.data());
 
@@ -26,6 +28,9 @@ function RecipeTesting() {
     getRecipe();
   }, []);
 
+  useEffect(() => {
+    setDate(recipe?.date?.split(","));
+  }, [recipe]);
   return (
     <div className='recipeInfo__wrapper'>
       <div className='recipeInfo__infos'>
@@ -35,9 +40,14 @@ function RecipeTesting() {
         </div>
         <div className='recipeInfo__tags'>
           {recipe.categories?.map((tag, i) => (
-            <p key={i}> {tag}</p>
+            <p style={{ textTransform: "capitalize" }} key={i}>
+              {tag}
+            </p>
           ))}
         </div>
+        <p style={{ textAlign: "center" }}>{`Created by ${recipe.username} (${
+          date ? date[0] : ""
+        })`}</p>
       </div>
       <div className='recipeInfo__infoWrapper_Wrapper'>
         <div className='recipeInfo__details'>
@@ -87,7 +97,6 @@ function RecipeTesting() {
                       <div className='ingredients__list'>
                         <li key={i}>{`${amount} ${unit} `}</li> -
                         <li className='ingredients__list__name'>
-                          {" "}
                           {ingredientName}
                         </li>
                       </div>

@@ -1,11 +1,11 @@
 import React from "react";
 import Home from "./Home";
-import HomeTest from "./HomeTest";
+// import HomeTest from "../archive/HomeTest";
 import { Route, Routes, useLocation } from "react-router-dom";
-import Cuisine from "./Cuisine";
+import Cuisine from "../archive/Cuisine";
 import CuisineNew from "./CuisineNew";
 import Searched from "./Searched";
-import Recipe from "./Recipe";
+// import Recipe from "../archive/Recipe";
 import Register from "./Register";
 import { AnimatePresence } from "framer-motion";
 import Login from "./Login";
@@ -14,9 +14,8 @@ import CreateRecipe from "./CreateRecipe";
 // import Testing from "./Testing";
 import MyRecipes from "./MyRecipes";
 import RecipeTesting from "./RecipeTesting";
-import ProtectedRoute from "./features/ProtectedRoutes";
+import ProtectedRoute from "../util/ProtectedRoutes";
 import AllRecipes from "../components/AllRecipes";
-import Question from "./Question";
 
 function Pages() {
   // const location = useLocation();
@@ -26,13 +25,13 @@ function Pages() {
     <AnimatePresence exitBeforeEnter>
       <Routes location={location} key={location.pathname}>
         <Route path='/' element={<Home />} />
-        <Route path='/homeTest' element={<HomeTest />} />
+        {/* <Route path='/homeTest' element={<HomeTest />} /> */}
         <Route path='/cuisine/:type' element={<Cuisine />} />
         <Route path='/cuisineNew/:type' element={<CuisineNew />} />
         <Route path='/searched/:search' element={<Searched />} />
-        <Route path='/recipe/:name' element={<Recipe />} />
+        {/* <Route path='/recipe/:name' element={<Recipe />} /> */}
         <Route path='/recipeTesting/:test' element={<RecipeTesting />} />
-        <Route path='/question/:test' element={<Question />} />
+
         <Route path='/allRecipes/:test' element={<AllRecipes />} />
         <Route path='/Register' element={<Register />} />
         <Route path='/Login' element={<Login />} />

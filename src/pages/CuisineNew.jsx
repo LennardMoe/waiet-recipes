@@ -29,20 +29,6 @@ function Cuisine() {
     });
   }, [params]);
 
-  // const getCuisine = async (name) => {
-  //   const data = await fetch(
-  //     `https://api.spoonacular.com/recipes/complexSearch?apiKey=${
-  //       import.meta.env.VITE_API_KEY
-  //     }&number=9&cuisine=${name}`
-  //   );
-  //   const recipes = await data.json();
-  //   setCuisine(recipes.results);
-  // };
-
-  // useEffect(() => {
-  //   getCuisine(params.type);
-  // }, [params.type]);
-
   return (
     <Grid
       animate={{ opacity: 1 }}

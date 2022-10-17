@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import styled from "styled-components";
+import FavoriteComponent from "./FavoriteComponent";
 
 function AllRecipes() {
   const [recipes, setRecipes] = useState([]);
@@ -56,6 +57,7 @@ function AllRecipes() {
             return (
               <SplideSlide key={recipe.id}>
                 <Card>
+                  <FavoriteComponent recipe={recipe} />
                   <Link to={"/recipeTesting/" + recipe.id}>
                     <p>{recipe.title}</p>
                     <img src={recipe.img} alt={recipe.title} />

@@ -5,6 +5,7 @@ import "@splidejs/react-splide/css";
 import { Link } from "react-router-dom";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../firebase";
+import FavoriteComponent from "./FavoriteComponent";
 
 function VeggieNew() {
   const [veggie, setVeggie] = useState([]);
@@ -12,28 +13,8 @@ function VeggieNew() {
 
   const q = query(
     collection(db, "recipes"),
-    where("categories", "array-contains", "Vegan")
+    where("categories", "array-contains", "vegan")
   );
-  //   useEffect(() => {
-  //     getVeggie();
-  //   }, []);
-
-  //   const getVeggie = async () => {
-  //     const check = localStorage.getItem("veggie");
-
-  //     if (check) {
-  //       setVeggie(JSON.parse(check));
-  //     } else {
-  //       const api = await fetch(
-  //         `https://api.spoonacular.com/recipes/random?apiKey=${
-  //           import.meta.env.VITE_API_KEY
-  //         }&number=9&tags=vegetarian`
-  //       );
-  //       const data = await api.json();
-  //       localStorage.setItem("veggie", JSON.stringify(data.recipes));
-  //       setVeggie(data.recipes);
-  //     }
-  //   };
 
   useEffect(() => {
     onSnapshot(q, (snapshot) => {
@@ -64,6 +45,7 @@ function VeggieNew() {
             return (
               <SplideSlide key={recipe.id}>
                 <Card>
+                  <FavoriteComponent recipe={recipe} />
                   <Link to={"/recipeTesting/" + recipe.id}>
                     <p>{recipe.title}</p>
                     <img src={recipe.img} alt={recipe.title} />

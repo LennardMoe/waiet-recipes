@@ -34,6 +34,10 @@
   justify-content: center;
   margin-bottom: 0.2rem;
   max-width: 15rem;
+  align-items: center;
+  text-align: center;
+  max-height: 2rem;
+  min-height: 2rem;
 }
 
 .myRecipe {

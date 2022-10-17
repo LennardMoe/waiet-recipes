@@ -18,6 +18,7 @@ export function AuthContextProvider({ children }) {
     createUserWithEmailAndPassword(auth, email, password);
     setDoc(doc(db, "users", email), {
       username: username,
+      savedRecipes: [],
     });
   }
 
