@@ -2,7 +2,7 @@ import React from "react";
 import Home from "./Home";
 // import HomeTest from "../archive/HomeTest";
 import { Route, Routes, useLocation } from "react-router-dom";
-import Cuisine from "../archive/Cuisine";
+
 import CuisineNew from "./CuisineNew";
 import Searched from "./Searched";
 // import Recipe from "../archive/Recipe";
@@ -27,8 +27,8 @@ function Pages() {
       <Routes location={location} key={location.pathname}>
         <Route path='/' element={<Home />} />
         {/* <Route path='/homeTest' element={<HomeTest />} /> */}
-        <Route path='/cuisine/:type' element={<Cuisine />} />
-        <Route path='/cuisineNew/:type' element={<CuisineNew />} />
+
+        <Route path='/cuisine/:type' element={<CuisineNew />} />
         <Route path='/searched/:search' element={<Searched />} />
         {/* <Route path='/recipe/:name' element={<Recipe />} /> */}
         <Route path='/recipeTesting/:test' element={<RecipeTesting />} />

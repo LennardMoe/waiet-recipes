@@ -1,28 +1,26 @@
-import { FaPizzaSlice, FaHamburger } from "react-icons/fa";
-import { GiNoodles, GiChopsticks } from "react-icons/gi";
+import { FaHamburger } from "react-icons/fa";
 import { BiCookie } from "react-icons/bi";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { TbCheese, TbSoup } from "react-icons/Tb";
-import { RiPlantLine } from "react-icons/Ri";
 
 function Category() {
   return (
     <List>
-      <SLink to={"/cuisineNew/soup"}>
+      <SLink to={"/cuisine/soup"}>
         <TbSoup />
         <h4>Soup</h4>
       </SLink>
-      <SLink to={"/cuisineNew/appetizer"}>
+      <SLink to={"/cuisine/appetizer"}>
         <TbCheese />
         <h4>Appetizer</h4>
       </SLink>
-      <SLink to={"/cuisineNew/maincourse"}>
+      <SLink to={"/cuisine/maincourse"}>
         <FaHamburger />
         <h4>Main</h4>
       </SLink>
 
-      <SLink to={"/cuisineNew/dessert"}>
+      <SLink to={"/cuisine/dessert"}>
         <BiCookie />
         <h4>Dessert</h4>
       </SLink>
