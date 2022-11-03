@@ -200,3 +200,23 @@
   font-weight: 700;
   margin-top: 10px;
 }
+
+.form__upload {
+  text-align: center;
+  margin: 0.5rem 0;
+}
+.form__upload label {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: var(--white);
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(174, 80, 80, 0.9));
+}
+.form__upload label:hover {
+  opacity: 0.8;
+}
+
+.form__upload label input[type="file"] {
+  display: none;
+}

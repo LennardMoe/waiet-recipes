@@ -3,19 +3,20 @@ import { useState, useEffect } from "react";
 import { UserAuth } from "../context/AuthContext";
 import { collection, doc, addDoc, getDoc } from "firebase/firestore";
 import "./createRecipe.css";
-import TableRows from "./features/TableRows";
+import TableRows from "../util/TableRows";
 import { useNavigate } from "react-router-dom";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { v4 } from "uuid";
 import Checkboxes from "../components/Checkboxes";
 
 function CreateRecipe() {
-  const [imgList, setImageList] = useState([]);
   const [imageUpload, setImageUpload] = useState(null);
   const navigate = useNavigate();
   const { user } = UserAuth();
   const imageListRef = ref(storage, "images/");
   const [categories, setCategories] = useState([]);
+  const [progress, setProgress] = useState(0);
+
   const [form, setForm] = useState({
     // url: url,
     createdBy: user.email,
@@ -40,6 +41,7 @@ function CreateRecipe() {
       },
     ],
     steps: ["", "", ""],
+    source: "",
     // categories: [],
   });
 
@@ -84,14 +86,14 @@ function CreateRecipe() {
     const uploadImage = () => {
       if (imageUpload == null) return;
       const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
-      uploadBytes(imageRef, imageUpload).then((snapshot) => {
+      uploadBytesResumable(imageRef, imageUpload).then((snapshot) => {
         getDownloadURL(snapshot.ref).then((url) => {
           console.log(url);
           setForm({
             ...form,
             img: url,
           });
-          setImageList((prev) => [...prev, url]);
+          setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
         });
 
         alert("Image Uploaded");
@@ -193,6 +195,7 @@ function CreateRecipe() {
         },
       ],
       steps: ["", "", ""],
+      source: "",
       // categories: [],
     });
     navigate("/MyRecipes");
@@ -296,14 +299,29 @@ function CreateRecipe() {
               </button>
             </div>
             {/* <Fileupload uploadImage={uploadImage} /> */}
-            <div>
+            <div className='form__upload'>
+              <label htmlFor='fileUpload'>
+                {!imageUpload
+                  ? "Click here to upload an Image"
+                  : `Imageupload ${progress}% completed`}
+                <input
+                  type='file'
+                  onChange={(event) => {
+                    setImageUpload(event.target.files[0]);
+                  }}
+                  name='fileUpload'
+                  id='fileUpload'
+                />
+              </label>
+            </div>
+            <div className='form__group'>
+              <label htmlFor='source'>Original Source</label>
               <input
-                type='file'
-                onChange={(event) => {
-                  setImageUpload(event.target.files[0]);
-                }}
-                name='fileUpload'
-                id='fileUpload'
+                type='text'
+                value={form.source}
+                onChange={(e) => setForm({ ...form, source: e.target.value })}
+                id='source'
+                placeholder='www.chefkoch.de/...'
               />
             </div>
 

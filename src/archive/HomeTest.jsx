@@ -6,9 +6,11 @@ import React from "react";
 import NewRecipe from "../components/CreateRecipeComponent";
 // import NewRecipe from "../components/NewRecipe";
 import styled from "styled-components";
-import AllRecipes from "../components/AllRecipes";
+// import TestBtn from "../components/TestBtn";
+import { UserAuth } from "../context/AuthContext";
 
 function Home() {
+  const { user } = UserAuth();
   return (
     <motion.div
       animate={{ opacity: 1 }}
@@ -16,13 +18,16 @@ function Home() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
+      {/* <NewRecipe /> */}
       <Styling>
         <div className='Test'>
           <NewRecipe />
         </div>
-        <MyRecipes />
+        {user ? <MyRecipes /> : ""}
+        {/* <TestBtn /> */}
       </Styling>
-      <AllRecipes />
+      <Veggie />
+      <Popular />
     </motion.div>
   );
 }

@@ -1,4 +1,4 @@
-import Veggie from "../components/Veggie";
+// import Veggie from "../archive/Veggie";
 import Popular from "../components/Popular";
 import { motion } from "framer-motion";
 import MyRecipes from "../components/MyRecipesComponent";
@@ -6,11 +6,10 @@ import React from "react";
 import NewRecipe from "../components/CreateRecipeComponent";
 // import NewRecipe from "../components/NewRecipe";
 import styled from "styled-components";
-import TestBtn from "../components/TestBtn";
-import { UserAuth } from "../context/AuthContext";
+import AllRecipes from "../components/AllRecipes";
+import VeggieNew from "../components/VeggieNew";
 
 function Home() {
-  const { user } = UserAuth();
   return (
     <motion.div
       animate={{ opacity: 1 }}
@@ -18,16 +17,14 @@ function Home() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      {/* <NewRecipe /> */}
       <Styling>
         <div className='Test'>
           <NewRecipe />
         </div>
-        {user ? <MyRecipes /> : ""}
-        <TestBtn />
+        <MyRecipes />
       </Styling>
-      <Veggie />
-      <Popular />
+      <AllRecipes />
+      <VeggieNew />
     </motion.div>
   );
 }

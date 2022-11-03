@@ -18,7 +18,7 @@ function Checkboxes({ setCategories, categories }) {
     <div>
       <label>Select Categories</label>
       <ul className='form__categories'>
-        {CheckboxData.map(({ name }, index) => {
+        {CheckboxData.map(({ name, value }, index) => {
           return (
             <li key={index}>
               <div className='categories__inputs'>
@@ -26,7 +26,7 @@ function Checkboxes({ setCategories, categories }) {
                   type='checkbox'
                   id={`category-checkbox-${index}`}
                   name={name}
-                  value={name}
+                  value={value}
                   onChange={handleChange}
                 />
                 <label htmlFor={`category-checkbox-${index}`}>{name} </label>

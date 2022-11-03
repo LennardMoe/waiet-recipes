@@ -41,7 +41,7 @@ function Register() {
     try {
       await signUp(email, password, username);
 
-      // navigate("/");
+      navigate("/");
     } catch (error) {
       setError(error.message);
       console.log(error.message);
