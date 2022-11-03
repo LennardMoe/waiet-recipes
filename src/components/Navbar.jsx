@@ -20,21 +20,21 @@ function Navbar() {
     await signOut(auth);
   };
 
-  // useEffect(() => {
-  //   async function getUserData() {
-  //     const docRef = doc(db, "users", user.email);
-  //     const docSnap = await getDoc(docRef);
+  useEffect(() => {
+    async function getUserData() {
+      const docRef = doc(db, "users", user.email);
+      const docSnap = await getDoc(docRef);
 
-  //     if (docSnap.exists()) {
-  //       console.log("Document data:", docSnap.data());
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
 
-  //       setUserData(docSnap.data());
-  //     } else {
-  //       console.log("No such document!");
-  //     }
-  //   }
-  //   getUserData();
-  // }, []);
+        setUserData(docSnap.data());
+      } else {
+        console.log("No such document!");
+      }
+    }
+    getUserData();
+  }, []);
 
   return (
     <Wrapper>
@@ -48,7 +48,7 @@ function Navbar() {
           <div className='navbar__wrapper'>
             <div className='navbar__login'>
               <h4>Logged in as </h4>
-              <h4>{user.email}</h4>
+              <h4>{userData.username}</h4>
             </div>
             <button onClick={logout}>Logout</button>
           </div>
@@ -63,11 +63,7 @@ function Navbar() {
           </>
         )}
       </Login>
-      <AccountData>
-        <Link to={"/account"}>
-          <button>Account</button>
-        </Link>
-      </AccountData>
+      <Account />
     </Wrapper>
   );
 }
@@ -99,27 +95,6 @@ const Nav = styled.div`
 `;
 
 const Login = styled.div`
-  display: flex;
-  button {
-    background: #732e36;
-    max-width: 7rem;
-    border-radius: 5px;
-    margin: 20px;
-    text-decoration: none;
-    border: none;
-    padding: 0.7rem 1.8rem;
-    color: #b3ffc3;
-    font-weight: 400;
-    font-size: 1rem;
-    font-family: "Alata";
-    cursor: pointer;
-  }
-  button:hover {
-    opacity: 0.9;
-  }
-`;
-
-const AccountData = styled.div`
   display: flex;
   button {
     background: #732e36;

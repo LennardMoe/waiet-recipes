@@ -36,11 +36,24 @@ function MyRecipes() {
       );
     });
   }, []);
-  console.log(recipes);
 
   const removeRecipe = (id) => {
     deleteDoc(doc(db, "recipes", id));
   };
+
+  // const handleView = (id) => {
+  //   const recipesClone = [...recipes];
+
+  //   recipesClone.forEach((recipe) => {
+  //     if (recipe.id === id) {
+  //       recipe.viewing = !recipe.viewing;
+  //     } else {
+  //       recipe.viewing = false;
+  //     }
+  //   });
+  //   setRecipes(recipesClone);
+  // };
+  // console.log(recipes);
 
   return (
     <div className='recipes__wrapper'>

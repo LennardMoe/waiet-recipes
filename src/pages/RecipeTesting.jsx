@@ -14,7 +14,7 @@ function RecipeTesting() {
 
   useEffect(() => {
     async function getRecipe() {
-      const docRef = doc(db, "recipes");
+      const docRef = doc(db, "recipes", params.test);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
