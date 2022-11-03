@@ -45,7 +45,9 @@ function VeggieNew() {
             return (
               <SplideSlide key={recipe.id}>
                 <Card>
-                  <FavoriteComponent recipe={recipe} />
+                  <div>
+                    <FavoriteComponent recipe={recipe} />
+                  </div>
                   <Link to={"/recipeTesting/" + recipe.id}>
                     <p>{recipe.title}</p>
                     <img src={recipe.img} alt={recipe.title} />
@@ -80,6 +82,11 @@ const Card = styled.div`
     /* min-width: 100%; */
     height: 100%;
     object-fit: cover;
+    transition: transform 0.5s;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+    &:hover {
+      transform: scale(1.1);
+    }
   }
   p {
     position: absolute;
@@ -104,5 +111,10 @@ const Gradient = styled.div`
   width: 100%;
   height: 100%;
   background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+  &:hover {
+    position: relative;
+    z-index: 0;
+    transform: scale(1.1);
+  }
 `;
 export default VeggieNew;

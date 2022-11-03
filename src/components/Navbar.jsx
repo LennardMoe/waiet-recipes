@@ -1,13 +1,16 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GiKnifeFork } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import Search from "./Search";
 import { UserAuth } from "../context/AuthContext";
+import { doc, getDoc } from "firebase/firestore";
+import Account from "../pages/Account";
 function Navbar() {
   const [user, setUser] = useState({});
+  const [userData, setUserData] = useState("");
 
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
@@ -16,6 +19,22 @@ function Navbar() {
   const logout = async () => {
     await signOut(auth);
   };
+
+  useEffect(() => {
+    async function getUserData() {
+      const docRef = doc(db, "users", user.email);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+
+        setUserData(docSnap.data());
+      } else {
+        console.log("No such document!");
+      }
+    }
+    getUserData();
+  }, []);
 
   return (
     <Wrapper>
@@ -29,7 +48,7 @@ function Navbar() {
           <div className='navbar__wrapper'>
             <div className='navbar__login'>
               <h4>Logged in as </h4>
-              <h4>{user.email}</h4>
+              <h4>{userData.username}</h4>
             </div>
             <button onClick={logout}>Logout</button>
           </div>
@@ -44,6 +63,7 @@ function Navbar() {
           </>
         )}
       </Login>
+      <Account />
     </Wrapper>
   );
 }

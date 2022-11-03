@@ -16,6 +16,7 @@ import MyRecipes from "./MyRecipes";
 import RecipeTesting from "./RecipeTesting";
 import ProtectedRoute from "../util/ProtectedRoutes";
 import AllRecipes from "../components/AllRecipes";
+import Account from "./Account";
 
 function Pages() {
   // const location = useLocation();
@@ -36,6 +37,7 @@ function Pages() {
         <Route path='/Register' element={<Register />} />
         <Route path='/Login' element={<Login />} />
         <Route path='/createRecipe' element={<CreateRecipe />} />
+        <Route path='/account' element={<Account />} />
 
         <Route
           path='/myRecipes'

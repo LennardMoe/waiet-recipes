@@ -60,7 +60,11 @@ function AllRecipes() {
                   <FavoriteComponent recipe={recipe} />
                   <Link to={"/recipeTesting/" + recipe.id}>
                     <p>{recipe.title}</p>
-                    <img src={recipe.img} alt={recipe.title} />
+                    <img
+                      className='allRecipes__img'
+                      src={recipe.img}
+                      alt={recipe.title}
+                    />
                     <Gradient />
                   </Link>
                 </Card>
@@ -83,14 +87,15 @@ const Card = styled.div`
   overflow: hidden;
   position: relative;
 
-  img {
+  /* img {
     border-radius: 2rem;
     position: absolute;
     left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
+  } */
+
   p {
     position: absolute;
     z-index: 10;
@@ -109,11 +114,16 @@ const Card = styled.div`
 `;
 
 const Gradient = styled.div`
-  z-index: 3;
+  z-index: 1;
   position: absolute;
   width: 100%;
   height: 100%;
   background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+  &:hover {
+    z-index: 0;
+    position: relative;
+    transform: scale(1.1);
+  }
 `;
 
 export default AllRecipes;

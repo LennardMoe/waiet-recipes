@@ -65,17 +65,7 @@ function FavoriteComponent({ recipe }) {
   return (
     <p onClick={saveRecipe}>
       {user?.email ? (
-        <span>
-          {like ? (
-            <Favorite>
-              <FaHeart />
-            </Favorite>
-          ) : (
-            <Favorite>
-              <FaRegHeart />
-            </Favorite>
-          )}
-        </span>
+        <Favorite>{like ? <FaHeart /> : <FaRegHeart />}</Favorite>
       ) : (
         ""
       )}
@@ -85,11 +75,23 @@ function FavoriteComponent({ recipe }) {
 
 const Favorite = styled.span`
   position: absolute;
-  z-index: 99999;
+  z-index: 99;
   left: 50%;
-  bottom: 220%;
-  transform: translate(-350%, 0%);
-  font-size: 25px;
+  bottom: 210%;
+  transform: translate(-50%, 0%);
+  color: #f7f7f7;
+  text-align: center;
+  font-weight: 800;
+  font-size: 2rem;
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    font-size: 2.2rem;
+    opacity: 0.9;
+  }
 `;
 
 export default FavoriteComponent;
