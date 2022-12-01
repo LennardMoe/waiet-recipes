@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import MyRecipes from "../components/MyRecipesComponent";
 import React from "react";
 import NewRecipe from "../components/CreateRecipeComponent";
+import AllRecipesList from "../components/AllRecipesListComponent";
 // import NewRecipe from "../components/NewRecipe";
 import styled from "styled-components";
 import AllRecipes from "../components/AllRecipes";
@@ -18,10 +19,9 @@ function Home() {
       transition={{ duration: 0.5 }}
     >
       <Styling>
-        <div className='Test'>
-          <NewRecipe />
-        </div>
+        <NewRecipe />
         <MyRecipes />
+        <AllRecipesList />
       </Styling>
       <AllRecipes />
       <VeggieNew />

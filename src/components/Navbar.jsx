@@ -9,32 +9,42 @@ import { UserAuth } from "../context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import Account from "../pages/Account";
 function Navbar() {
-  const [user, setUser] = useState({});
-  const [userData, setUserData] = useState("");
+  // const [user, setUser] = useState({});
+  const [userData, setUserData] = useState([]);
+  const [userName, setUserName] = useState("");
+  const { user, logOut } = UserAuth();
 
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
+  // onAuthStateChanged(auth, (currentUser) => {
+  //   setUser(currentUser);
+  // });
 
-  const logout = async () => {
-    await signOut(auth);
-  };
+  // const logout = async () => {
+  //   await signOut(auth);
+  // };
+
+  useEffect(() => {
+    if (user) {
+      async function getUserData() {
+        const docRef = doc(db, "users", user.email);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data());
+
+          setUserData(docSnap.data());
+        } else {
+          console.log("No such document!");
+        }
+      }
+      getUserData();
+    } else {
+      console.log("No User");
+    }
+  }, [user]);
 
   // useEffect(() => {
-  //   async function getUserData() {
-  //     const docRef = doc(db, "users", user.email);
-  //     const docSnap = await getDoc(docRef);
-
-  //     if (docSnap.exists()) {
-  //       console.log("Document data:", docSnap.data());
-
-  //       setUserData(docSnap.data());
-  //     } else {
-  //       console.log("No such document!");
-  //     }
-  //   }
-  //   getUserData();
-  // }, []);
+  //   setUserName(userData.username);
+  // }, [userData.username]);
 
   return (
     <Wrapper>
@@ -48,16 +58,20 @@ function Navbar() {
           <div className='navbar__wrapper'>
             <div className='navbar__login'>
               <h4>Logged in as </h4>
-              <h4>{user.email}</h4>
+              {userData.username ? (
+                <h4> {userData.username} </h4>
+              ) : (
+                <h4>{user.email}</h4>
+              )}
             </div>
-            <button onClick={logout}>Logout</button>
+            <button onClick={logOut}>Logout</button>
           </div>
         ) : (
           <>
-            <Link to={"/Login/"}>
+            <Link to={"/login/"}>
               <button>Login</button>
             </Link>
-            <Link to={"/Register/"}>
+            <Link to={"/register/"}>
               <button>Register</button>
             </Link>
           </>
@@ -78,6 +92,7 @@ const Wrapper = styled.nav`
   flex-direction: row;
   margin: 0;
   box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.2);
+  align-items: center;
 `;
 
 const Logo = styled(Link)`
