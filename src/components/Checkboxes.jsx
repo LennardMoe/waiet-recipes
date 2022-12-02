@@ -17,11 +17,11 @@ function Checkboxes({ setCategories, categories }) {
   return (
     <div>
       <label>Select Categories</label>
-      <ul className='form__categories'>
+      <ul className='createReciepe__formCategories'>
         {CheckboxData.map(({ name, value }, index) => {
           return (
             <li key={index}>
-              <div className='categories__inputs'>
+              <div className='createRecipe__categoriesInputs'>
                 <input
                   type='checkbox'
                   id={`category-checkbox-${index}`}

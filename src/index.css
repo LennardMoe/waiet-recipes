@@ -8,7 +8,7 @@
 }
 
 :root {
-  --bg-green: #b8e3c2;
+  --bg-green: #e6e6e6;
   --primary-red: #732e36;
   --text-green: #b3ffc3;
   --bright-red: #bf737c;
@@ -18,21 +18,30 @@
   --border-bright: rgba(228, 224, 224, 0.805);
   --dark: #0f0e0e;
   --white: rgb(246, 243, 243);
+  /* --text: #233748; */
+
+  /* NEW */
+  --background: #fffafb;
+  --buttons: #3c5645;
+  --buttonsHover: #2f4336;
+  --buttonsDelete: #732e36;
+  --buttonText: #ebebeb;
+  --text: #313131;
 }
 
 body {
   margin: 0% 20%;
-  background: var(--bg-green);
+  background: var(--background);
 }
 
 h4 {
   font-size: 1rem;
-  color: var(--primary-red);
+  color: var(--text);
 }
 
 h3 {
   font-size: 1.5rem;
-  color: var(--primary-red);
+  color: var(--text);
   text-shadow: 2px 2px 4px var(--border-bright);
   line-height: 2.5rem;
   margin: 2rem 0rem;
@@ -40,4 +49,15 @@ h3 {
 
 a {
   color: rgb(56, 56, 56);
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+label,
+thead {
+  color: var(--text);
+  text-shadow: -1px -1px 0 #000, 0, 0, 0;
 }

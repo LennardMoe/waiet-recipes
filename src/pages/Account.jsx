@@ -82,7 +82,7 @@ function Account() {
         {favoriteRecipes.map((recipe) => {
           return (
             <Card key={recipe.id}>
-              <Link to={"/recipeTesting/" + recipe.id}>
+              <Link to={"/recipe/" + recipe.id}>
                 <img src={recipe.img} alt='food' />
                 <h4>{recipe.title}</h4>
               </Link>

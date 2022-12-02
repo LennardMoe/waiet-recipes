@@ -9,34 +9,29 @@ import Searched from "./Searched";
 import Register from "./Register";
 import { AnimatePresence } from "framer-motion";
 import Login from "./Login";
-// import CreateRecipe from "./CreateRecipe";
 import CreateRecipe from "./CreateRecipe";
-// import Testing from "./Testing";
 import MyRecipes from "./MyRecipes";
-import RecipeTesting from "./RecipeTesting";
+import Recipe from "./Recipe";
 import ProtectedRoute from "../util/ProtectedRoutes";
 import AllRecipes from "../components/AllRecipes";
 import Account from "./Account";
+import AllRecipesList from "./AllRecipesList";
 
 function Pages() {
-  // const location = useLocation();
-  // const show = !location.pathname.includes("createrecipe");
-
   return (
     <AnimatePresence exitBeforeEnter>
       <Routes location={location} key={location.pathname}>
         <Route path='/' element={<Home />} />
-        {/* <Route path='/homeTest' element={<HomeTest />} /> */}
 
         <Route path='/cuisine/:type' element={<CuisineNew />} />
         <Route path='/searched/:search' element={<Searched />} />
-        {/* <Route path='/recipe/:name' element={<Recipe />} /> */}
-        <Route path='/recipeTesting/:test' element={<RecipeTesting />} />
 
+        <Route path='/recipe/:name' element={<Recipe />} />
         <Route path='/allRecipes/:test' element={<AllRecipes />} />
-        <Route path='/Register' element={<Register />} />
-        <Route path='/Login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/createRecipe' element={<CreateRecipe />} />
+        <Route path='/allRecipesList' element={<AllRecipesList />} />
         <Route path='/account' element={<Account />} />
 
         <Route

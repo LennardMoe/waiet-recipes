@@ -39,7 +39,7 @@ function Cuisine() {
       {cuisine.map((item) => {
         return (
           <Card key={item.id}>
-            <Link to={"/recipeTesting/" + item.id}>
+            <Link to={"/recipe/" + item.id}>
               <img src={item.img} alt='food' />
               <h4>{item.title}</h4>
             </Link>

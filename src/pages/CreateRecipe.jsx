@@ -2,7 +2,7 @@ import { db, storage } from "../firebase";
 import { useState, useEffect } from "react";
 import { UserAuth } from "../context/AuthContext";
 import { collection, doc, addDoc, getDoc } from "firebase/firestore";
-import "./createRecipe.css";
+import "./CreateRecipe.css";
 import TableRows from "../util/TableRows";
 import { useNavigate } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
@@ -95,8 +95,6 @@ function CreateRecipe() {
           });
           setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
         });
-
-        alert("Image Uploaded");
       });
     };
     imageUpload && uploadImage();
@@ -202,14 +200,14 @@ function CreateRecipe() {
   };
 
   return (
-    <div className='wrapper__newRecipe'>
+    <div className='createRecipe__globalWrapper'>
       {/* Create new Recipe form */}
-      <div className='newRecipe__wrapper'>
-        <div className='newRecipe__inner'>
+      <div className='createRecipe__innerWrapper'>
+        <div className='createRecipe__content'>
           <h2>Add a new recipe</h2>
           <form className='newRecipe__form' onSubmit={handleSubmit}>
-            <div className='form__group'>
-              <label htmlFor='Title'>Title</label>
+            <div className='createRecipe__formGroup'>
+              <label htmlFor='Title'>Name of your recipe</label>
               <input
                 type='text'
                 value={form.title}
@@ -218,7 +216,7 @@ function CreateRecipe() {
                 placeholder='Tomato soup, Egg salad, Roastbeef...'
               />
             </div>
-            <div className='form__group '>
+            <div className='createRecipe__formGroup'>
               <label htmlFor='desc'>Description</label>
               <textarea
                 type='text'
@@ -226,23 +224,23 @@ function CreateRecipe() {
                 onChange={(e) =>
                   setForm({ ...form, description: e.target.value })
                 }
-                className='form__description'
+                className='createRecipe__formDescription'
                 id='desc'
               />
             </div>
             {/*Checkboxes  */}
-            <div className='form__group'>
+            <div className='createRecipe__formGroup'>
               <Checkboxes
                 setCategories={setCategories}
                 categories={categories}
               />
             </div>
             {/* Ingredients */}
-            <div className='newIngredients__wrapper'>
-              <div className='form__group '>
+            <div className='form-ingredient'>
+              <div className='createRecipe__formGroup'>
                 <label htmlFor='Ingredients'>Ingredients</label>
               </div>
-              <table className='form__table'>
+              <table className='createRecipe__formTable'>
                 <thead>
                   <tr>
                     <th>Ingredient Name</th>
@@ -261,7 +259,7 @@ function CreateRecipe() {
               <button
                 type='button'
                 onClick={addTableRows}
-                className='btn btn__add'
+                className='createRecipe__btn createRecipe__btnAdd'
               >
                 Add Ingredient
               </button>
@@ -270,12 +268,12 @@ function CreateRecipe() {
             {/* Ingredietns ends */}
             {/* Steps Begin */}
 
-            <div className='form__group'>
+            <div className='createRecipe__formGroup'>
               <label>Steps</label>
 
-              <div className='form__stepsGrid'>
+              <div className='createRecipe__formStepsGrid'>
                 {form.steps.map((step, i) => (
-                  <div className='form__steps'>
+                  <div className='createRecipe__formSteps'>
                     <textarea
                       type='text'
                       key={i}
@@ -284,14 +282,18 @@ function CreateRecipe() {
                       className='steps__textarea'
                       placeholder={`Step ${i + 1}`}
                     />
-                    <button className='btn' type='button' onClick={deleteSteps}>
+                    <button
+                      className='createRecipe__btn createRecipe__btnDelete'
+                      type='button'
+                      onClick={deleteSteps}
+                    >
                       Delete
                     </button>
                   </div>
                 ))}
               </div>
               <button
-                className='btn btn__add'
+                className='createRecipe__btn createRecipe__btnAdd'
                 type='button'
                 onClick={handleStepCount}
               >
@@ -299,7 +301,7 @@ function CreateRecipe() {
               </button>
             </div>
             {/* <Fileupload uploadImage={uploadImage} /> */}
-            <div className='form__upload'>
+            <div className='createRecipe__formUpload'>
               <label htmlFor='fileUpload'>
                 {!imageUpload
                   ? "Click here to upload an Image"
@@ -314,7 +316,7 @@ function CreateRecipe() {
                 />
               </label>
             </div>
-            <div className='form__group'>
+            <div className='createRecipe__formGroup'>
               <label htmlFor='source'>Original Source</label>
               <input
                 type='text'
@@ -326,8 +328,11 @@ function CreateRecipe() {
             </div>
 
             {/* Submit  Button */}
-            <div className='recipe__buttons'>
-              <button className=' btn__submit btn' type='submit'>
+            <div className='createRecipe__btns'>
+              <button
+                className=' createRecipe__btnSubmit createRecipe__btn'
+                type='submit'
+              >
                 Submit
               </button>
             </div>

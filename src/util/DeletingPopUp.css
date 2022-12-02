@@ -1,0 +1,47 @@
+.popup__container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.popup__body {
+  position: absolute;
+  left: 36%;
+  right: 36%;
+  bottom: 36%;
+  top: 36%;
+  text-align: center;
+  margin: auto;
+  border-radius: 15px;
+  border-color: black;
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup__buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+.popup__body h3 {
+  font-size: 1.4rem;
+}
+.popup__body button {
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+}
+
+.popUp_btnDelete {
+  background-color: var(--buttonsDelete) !important;
+}

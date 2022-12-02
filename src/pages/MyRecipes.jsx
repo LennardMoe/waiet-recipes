@@ -11,12 +11,14 @@ import { useEffect, useState } from "react";
 import { UserAuth } from "../context/AuthContext";
 import { getStorage, ref, deleteObject } from "firebase/storage";
 import { Link } from "react-router-dom";
+import { PopUp } from "../util/DeletingPopUp";
 
 function MyRecipes() {
   const { user } = UserAuth();
   const [recipes, setRecipes] = useState([]);
   const recipesCollectionRef = collection(db, "recipes");
   const [userRecipe, setUserRecipe] = useState([]);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     let recipeData = userRecipe.filter((item) => user.email === item.createdBy);
@@ -51,7 +53,8 @@ function MyRecipes() {
           <h4>You don't have any Recipes yet?</h4>
           <p>
             Click <Link to={"/createRecipe/"}> here </Link>to create a new
-            recipes or <Link to={"/"}>here </Link> to see all recipes
+            recipe or <Link to={"/allRecipesList"}>here </Link> to see all
+            recipes
           </p>
         </div>
       ) : (
@@ -84,11 +87,19 @@ function MyRecipes() {
                     </button>
                   </Link>
                   <button
-                    onClick={() => removeRecipe(recipe.id)}
+                    // onClick={() => removeRecipe(recipe.id)}
+                    onClick={() => setOpen(true)}
                     className='recipe__btnRemove'
                   >
                     Remove
                   </button>
+                  {open ? (
+                    <PopUp
+                      text={`Do you really want to delete ${recipe.title}?`}
+                      closePopup={() => setOpen(false)}
+                      deleteRecipe={() => removeRecipe(recipe.id)}
+                    />
+                  ) : null}
                 </div>
                 <p>{`Created  ${recipe.date}`}</p>
                 {recipe.source ? (

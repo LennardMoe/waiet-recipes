@@ -1,12 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
-
 import { doc, getDoc } from "firebase/firestore";
+import "./Recipe.css";
 
-import "./RecipeTesting.css";
-
-function RecipeTesting() {
+function Recipe() {
   let params = useParams();
   const [activeTab, setActiveTab] = useState("instructions");
   const [recipe, setRecipe] = useState([]);
@@ -14,7 +12,7 @@ function RecipeTesting() {
 
   useEffect(() => {
     async function getRecipe() {
-      const docRef = doc(db, "recipes");
+      const docRef = doc(db, "recipes", params.name);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
@@ -112,4 +110,4 @@ function RecipeTesting() {
   );
 }
 
-export default RecipeTesting;
+export default Recipe;
