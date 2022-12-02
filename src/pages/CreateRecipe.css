@@ -199,6 +199,10 @@
   margin: 0.5rem;
 }
 
+.createRecipe__btnDelete {
+  background-color: var(--buttonsDelete);
+}
+
 /* IMG Upload */
 .createRecipe__formUpload {
   text-align: center;
@@ -211,6 +215,7 @@
   cursor: pointer;
   color: var(--white);
   background: var(--buttonsDelete);
+  opacity: 0.8;
 }
 .createRecipe__formUpload label:hover {
   opacity: 0.8;

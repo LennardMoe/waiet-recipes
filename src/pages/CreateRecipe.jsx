@@ -283,7 +283,7 @@ function CreateRecipe() {
                       placeholder={`Step ${i + 1}`}
                     />
                     <button
-                      className='createRecipe__btn'
+                      className='createRecipe__btn createRecipe__btnDelete'
                       type='button'
                       onClick={deleteSteps}
                     >
