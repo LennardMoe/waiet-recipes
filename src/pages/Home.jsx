@@ -10,6 +10,7 @@ import styled from "styled-components";
 import AllRecipes from "../components/AllRecipes";
 import VeggieNew from "../components/VeggieNew";
 import HomeButtons from "../components/Button";
+import { devices } from "../util/breakpoints";
 
 function Home() {
   return (
@@ -20,7 +21,7 @@ function Home() {
       transition={{ duration: 0.5 }}
     >
       <Styling>
-        <HomeButtons text='Add New Recipe' link='/createRecipe/' />
+        <HomeButtons text='New Recipe' link='/createRecipe/' />
         <HomeButtons text='My Recipes' link='/MyRecipes/' />
         <HomeButtons text='View All' link='/allRecipesList/' />
       </Styling>
@@ -31,9 +32,13 @@ function Home() {
 }
 
 const Styling = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1rem;
+  @media ${devices.laptop} {
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+  }
   /* .Test {
     margin-right: 1rem;
   } */

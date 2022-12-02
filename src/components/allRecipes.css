@@ -4,7 +4,13 @@
   grid-gap: 1rem 3rem; */
   margin: 3rem 0rem;
 }
-
+.allRecipes__wrapper h3 {
+  font-size: 1.5rem;
+  color: var(--text);
+  text-shadow: 2px 2px 4px var(--border-bright);
+  line-height: 2.5rem;
+  margin: 2rem 0rem;
+}
 .allRecipes__card {
   min-height: 25rem;
   border-radius: 2rem;
