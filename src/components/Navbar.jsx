@@ -8,6 +8,7 @@ import Search from "./Search";
 import { UserAuth } from "../context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import Account from "../pages/Account";
+import { devices } from "../util/breakpoints";
 function Navbar() {
   // const [user, setUser] = useState({});
   const [userData, setUserData] = useState([]);
@@ -123,20 +124,28 @@ const Login = styled.div`
   display: flex;
   button {
     background: var(--buttons);
-    max-width: 7rem;
+    min-width: 10rem;
     border-radius: 5px;
-    margin: 20px;
+    margin: 1rem;
     text-decoration: none;
     border: none;
-    padding: 0.7rem 1.8rem;
+    padding: 0.7rem 0rem;
     color: var(--buttonText);
     font-weight: 400;
     font-size: 1rem;
     font-family: "Alata";
     cursor: pointer;
+    @media ${devices.laptop} {
+      min-width: 8rem;
+      margin: 0.1rem;
+      margin-left: 1rem;
+    }
   }
   button:hover {
     opacity: 0.9;
+  }
+  @media ${devices.laptop} {
+    flex-direction: column;
   }
 `;
 

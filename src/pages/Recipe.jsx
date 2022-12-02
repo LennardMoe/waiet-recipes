@@ -88,18 +88,33 @@ function Recipe() {
           <div className='recipeInfo__info'>
             {activeTab === "ingredients" && (
               <div>
-                <h4> Ingredients</h4>
-                <div className='recipeInfo__ingredients'>
-                  {recipe.ingredients.map(
-                    ({ ingredientName, amount, unit }, i) => (
-                      <div className='ingredients__list'>
-                        <li key={i}>{`${amount} ${unit} `}</li> -
-                        <li className='ingredients__list__name'>
-                          {ingredientName}
-                        </li>
-                      </div>
-                    )
-                  )}
+                <div>
+                  <table className='recipeInfo__ingredients'>
+                    <tr>
+                      <th>Zutat</th>
+                      {/* <th>Einheit</th> */}
+                      <th>Name</th>
+                    </tr>
+                    {recipe.ingredients.map(
+                      ({ ingredientName, amount, unit }, i) => (
+                        <tr key={i}>
+                          <td>
+                            {amount} &nbsp;
+                            {unit}
+                          </td>
+                          {/* <td></td> */}
+                          <td>{ingredientName}</td>
+                        </tr>
+
+                        // <div className='ingredients__list'>
+                        //   <li key={i}>{`${amount} ${unit} `}</li> -
+                        //   <li className='ingredients__list__name'>
+                        //     {ingredientName}
+                        //   </li>
+                        // </div>
+                      )
+                    )}
+                  </table>
                 </div>
               </div>
             )}

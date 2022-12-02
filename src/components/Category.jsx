@@ -3,6 +3,7 @@ import { BiCookie } from "react-icons/bi";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { TbCheese, TbSoup } from "react-icons/Tb";
+import { devices } from "../util/breakpoints";
 
 function Category() {
   return (
@@ -31,7 +32,11 @@ function Category() {
 const List = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 2rem 0rem;
+  @media ${devices.tablet} {
+    margin: 0;
+  }
 `;
 
 const SLink = styled(NavLink)`
@@ -39,7 +44,7 @@ const SLink = styled(NavLink)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
+  border-radius: 25rem;
   margin-right: 2rem;
   text-decoration: none;
   background: linear-gradient(35deg, #494949, #313131);
@@ -47,10 +52,24 @@ const SLink = styled(NavLink)`
   height: 6rem;
   cursor: pointer;
   transform: scale(0.8);
+  @media ${devices.tablet} {
+    margin: 1rem 0.2rem;
+    min-width: fit-content;
+    min-height: fit-content;
+    text-align: center;
+  }
+  @media ${devices.mobileL} {
+    margin: 1rem 0rem;
+    min-height: fit-content;
+    text-align: center;
+  }
 
   h4 {
     color: white;
     font-size: 1rem;
+    @media ${devices.tablet} {
+      font-size: 0.9rem;
+    }
   }
 
   svg {

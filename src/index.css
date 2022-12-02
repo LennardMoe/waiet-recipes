@@ -27,6 +27,8 @@
   --buttonsDelete: #732e36;
   --buttonText: #ebebeb;
   --text: #313131;
+  --border: #d3cbcb;
+  --textShadowDark: #1f1e1e;
 }
 
 body {
@@ -39,13 +41,13 @@ h4 {
   color: var(--text);
 }
 
-h3 {
+/* h3 {
   font-size: 1.5rem;
   color: var(--text);
   text-shadow: 2px 2px 4px var(--border-bright);
   line-height: 2.5rem;
   margin: 2rem 0rem;
-}
+} */
 
 a {
   color: rgb(56, 56, 56);

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { devices } from "../util/breakpoints";
 
 function HomeButton(props) {
   return (
@@ -14,12 +15,13 @@ function HomeButton(props) {
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin: 0;
+  align-items: center;
 `;
 
 const Button = styled.button`
+  /* min-width: 15rem; */
   min-width: 15rem;
-  padding: 1rem;
+  padding: 0.5rem;
   background: var(--buttons);
   border-radius: 5px;
   text-decoration: none;
@@ -32,6 +34,29 @@ const Button = styled.button`
   cursor: pointer;
   :hover {
     opacity: 0.9;
+  }
+  @media ${devices.laptopM} {
+    font-size: 1.2rem;
+    min-width: 15rem;
+    max-width: 20rem;
+    text-align: center;
+    letter-spacing: 1px;
+    padding: 0.5rem;
+  }
+  @media ${devices.laptopL} {
+    font-size: 1.5rem;
+    min-width: 15rem;
+    text-align: center;
+    letter-spacing: 1px;
+    padding: 1rem 4rem;
+  }
+  @media ${devices.desktop} {
+    font-size: 1.5rem;
+    min-width: 15rem;
+
+    text-align: center;
+    letter-spacing: 1px;
+    padding: 1rem 8rem;
   }
 `;
 export default HomeButton;

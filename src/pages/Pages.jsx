@@ -30,9 +30,23 @@ function Pages() {
         <Route path='/allRecipes/:test' element={<AllRecipes />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/createRecipe' element={<CreateRecipe />} />
+        <Route
+          path='/createRecipe'
+          element={
+            <ProtectedRoute>
+              <CreateRecipe />
+            </ProtectedRoute>
+          }
+        />
         <Route path='/allRecipesList' element={<AllRecipesList />} />
-        <Route path='/account' element={<Account />} />
+        <Route
+          path='/account'
+          element={
+            <ProtectedRoute>
+              <Account />
+            </ProtectedRoute>
+          }
+        />
 
         <Route
           path='/myRecipes'
