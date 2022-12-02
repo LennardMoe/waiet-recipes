@@ -14,7 +14,7 @@
   margin-bottom: 1rem;
   text-shadow: 2px 2px 2px var(--white, 0.5);
   letter-spacing: 3px;
-  color: var(--dark);
+  color: var(--text);
 }
 .myRecipe h3 {
   text-align: center;

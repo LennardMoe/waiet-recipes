@@ -2,6 +2,7 @@
   border-collapse: collapse;
   width: 100%;
   cursor: default;
+  color: var(--text);
 }
 
 #allRecipesList__table td,
@@ -26,6 +27,6 @@
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: var(--primary-red);
+  background-color: var(--buttons);
   color: white;
 }

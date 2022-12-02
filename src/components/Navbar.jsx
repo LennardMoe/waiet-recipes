@@ -1,7 +1,7 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { GiKnifeFork } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth, db } from "../firebase";
 import Search from "./Search";
@@ -13,6 +13,7 @@ function Navbar() {
   const [userData, setUserData] = useState([]);
   const [userName, setUserName] = useState("");
   const { user, logOut } = UserAuth();
+  const navigate = useNavigate();
 
   // onAuthStateChanged(auth, (currentUser) => {
   //   setUser(currentUser);
@@ -21,6 +22,11 @@ function Navbar() {
   // const logout = async () => {
   //   await signOut(auth);
   // };
+
+  const logout = () => {
+    logOut();
+    // navigate("/");
+  };
 
   useEffect(() => {
     if (user) {
@@ -64,7 +70,12 @@ function Navbar() {
                 <h4>{user.email}</h4>
               )}
             </div>
-            <button onClick={logOut}>Logout</button>
+            <button onClick={logout}>Logout</button>
+            <AccountData>
+              <Link to={"/account"}>
+                <button>Account</button>
+              </Link>
+            </AccountData>
           </div>
         ) : (
           <>
@@ -77,11 +88,6 @@ function Navbar() {
           </>
         )}
       </Login>
-      <AccountData>
-        <Link to={"/account"}>
-          <button>Account</button>
-        </Link>
-      </AccountData>
     </Wrapper>
   );
 }
@@ -116,14 +122,14 @@ const Nav = styled.div`
 const Login = styled.div`
   display: flex;
   button {
-    background: #732e36;
+    background: var(--buttons);
     max-width: 7rem;
     border-radius: 5px;
     margin: 20px;
     text-decoration: none;
     border: none;
     padding: 0.7rem 1.8rem;
-    color: #b3ffc3;
+    color: var(--buttonText);
     font-weight: 400;
     font-size: 1rem;
     font-family: "Alata";
@@ -137,14 +143,14 @@ const Login = styled.div`
 const AccountData = styled.div`
   display: flex;
   button {
-    background: #732e36;
+    background: var(--buttons);
     max-width: 7rem;
     border-radius: 5px;
     margin: 20px;
     text-decoration: none;
     border: none;
     padding: 0.7rem 1.8rem;
-    color: #b3ffc3;
+    color: var(--buttonText);
     font-weight: 400;
     font-size: 1rem;
     font-family: "Alata";
