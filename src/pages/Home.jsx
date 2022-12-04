@@ -22,7 +22,7 @@ function Home() {
     >
       <Styling>
         <HomeButtons text='New Recipes' link='/createRecipe/' />
-        <HomeButtons text='My Recipes' link='/MyRecipes/' />
+        <HomeButtons text='My Recipe' link='/MyRecipes/' />
         <HomeButtons text='View All' link='/allRecipesList/' />
       </Styling>
       <AllRecipes />
