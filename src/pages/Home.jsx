@@ -21,7 +21,7 @@ function Home() {
       transition={{ duration: 0.5 }}
     >
       <Styling>
-        <HomeButtons text='New Recipe' link='/createRecipe/' />
+        <HomeButtons text='New Recipes' link='/createRecipe/' />
         <HomeButtons text='My Recipes' link='/MyRecipes/' />
         <HomeButtons text='View All' link='/allRecipesList/' />
       </Styling>
