@@ -17,7 +17,9 @@ function App() {
           <Navbar />
           <Category />
           <Pages />
-          <Footer />
+          <div className='footerr'>
+            <Footer />
+          </div>
         </BrowserRouter>
       </div>
     </AuthContextProvider>

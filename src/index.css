@@ -31,9 +31,17 @@
   --textShadowDark: #1f1e1e;
 }
 
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
   margin: 0% 20%;
   background: var(--background);
+  display: grid;
+  /* display: flex; */
+  /* flex-direction: row; */
 }
 
 h4 {
