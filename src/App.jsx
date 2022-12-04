@@ -5,6 +5,7 @@ import Category from "./components/Category";
 import { BrowserRouter, useLocation } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 import { AuthContextProvider } from "./context/AuthContext";
 
@@ -16,6 +17,9 @@ function App() {
           <Navbar />
           <Category />
           <Pages />
+          <div className='footerr'>
+            <Footer />
+          </div>
         </BrowserRouter>
       </div>
     </AuthContextProvider>
