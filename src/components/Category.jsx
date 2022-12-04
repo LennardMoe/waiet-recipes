@@ -2,18 +2,18 @@ import { FaHamburger } from "react-icons/fa";
 import { BiCookie } from "react-icons/bi";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { TbCheese, TbSoup } from "react-icons/Tb";
+// import { TbCheese, TbSoup } from "react-icons/Tb";
 import { devices } from "../util/breakpoints";
 
 function Category() {
   return (
     <List>
       <SLink to={"/cuisine/soup"}>
-        <TbSoup />
+        {/* <TbSoup /> */}
         <h4>Soup</h4>
       </SLink>
       <SLink to={"/cuisine/appetizer"}>
-        <TbCheese />
+        {/* <TbCheese /> */}
         <h4>Appetizer</h4>
       </SLink>
       <SLink to={"/cuisine/maincourse"}>
