@@ -12,14 +12,15 @@ import { AuthContextProvider } from "./context/AuthContext";
 function App() {
   return (
     <AuthContextProvider>
-      <div className='App'>
+      <div className='app'>
         <BrowserRouter>
           <Navbar />
-          <Category />
-          <Pages />
-          <div className='footerr'>
-            <Footer />
+          <div className='content'>
+            <Category />
+            <Pages />
           </div>
+
+          <Footer />
         </BrowserRouter>
       </div>
     </AuthContextProvider>
