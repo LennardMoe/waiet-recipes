@@ -33,11 +33,11 @@ const Foot = styled.footer`
   padding: 1rem;
   align-items: center;
   justify-content: right;
-  position: sticky;
+  /* position: sticky; */
   gap: 2rem;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  /* bottom: 0; */
+  /* left: 0; */
+  /* width: 100%; */
   .footer__github {
     margin-right: 0.5rem;
     color: var(--text);
