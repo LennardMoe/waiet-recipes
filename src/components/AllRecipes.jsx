@@ -47,7 +47,21 @@ function AllRecipes() {
         <h3>All Recipes</h3>
         <Splide
           options={{
+            type: "loop",
+            // mediaQuery: "min",
             perPage: 4,
+            breakpoints: {
+              1380: {
+                perPage: 3,
+              },
+              1020: {
+                perPage: 2,
+              },
+              660: {
+                perPage: 1,
+              },
+            },
+
             pagination: false,
             drag: "free",
             gap: "5rem",
