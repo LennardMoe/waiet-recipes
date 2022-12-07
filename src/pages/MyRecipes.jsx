@@ -78,7 +78,7 @@ function MyRecipes() {
                 </div>
 
                 <div className='recipe__btn'>
-                  <Link to={"/recipeTesting/" + recipe.id}>
+                  <Link to={"/recipe/" + recipe.id}>
                     {" "}
                     <button>
                       {/* // onClick={() => handleView(recipe.id)}>  */}

@@ -1,13 +1,3 @@
-.navbar__login h4 {
-  padding: 5px;
-}
-
-.navbar__wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
 .app {
   display: flex;
   flex-direction: column;
