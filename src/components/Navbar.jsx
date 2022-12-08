@@ -19,6 +19,7 @@ function Navbar() {
     setNavMenu(false);
     navigate("/account");
   };
+
   const navigateLogin = () => {
     setNavMenu(false);
     navigate("/login");
