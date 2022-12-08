@@ -8,6 +8,12 @@
   margin-bottom: 5rem;
 }
 
+/* @media (max-width: 2000px) {
+  .createRecipe__innerWrapper {
+    width: 200px;
+  }
+} */
+
 .createRecipe__innerWrapper {
   border: #d3c9c9 3px solid;
   background: linear-gradient(35deg, #fffbfb, #dfdada);
@@ -16,24 +22,6 @@
   justify-content: center;
   align-items: center;
 }
-/* .recipes h3 {
-  margin: 0;
-  padding: 0.5rem 0;
-} */
-
-/* .recipe {
-  border: black solid 1px;
-  margin: 1rem;
-}
-
-.recipe__table {
-  padding: 1rem;
-} */
-
-/* .recipes__ingredientsHeading {
-  margin: 0.5rem;
-  font-size: 18px;
-} */
 
 .createRecipe__content {
   display: flex;

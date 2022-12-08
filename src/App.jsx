@@ -15,7 +15,7 @@ function App() {
       <div className='app'>
         <BrowserRouter>
           <Navbar />
-          <div className='content'>
+          <div className='app__content'>
             <Category />
             <Pages />
           </div>

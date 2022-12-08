@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { db } from "../firebase";
 import "./AllRecipesList.css";
-// import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
-// import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
+window.global ||= window;
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 
 function AllRecipesList() {
   const [recipes, setRecipes] = useState([]);
@@ -24,7 +25,42 @@ function AllRecipesList() {
   }, []);
 
   return (
-    <table id='allRecipesList__table'>
+    <Table id='allRecipesList__table'>
+      <Thead>
+        <Tr>
+          <Th>Name</Th>
+          <Th>Description</Th>
+          <Th>Created By</Th>
+          <Th>Date</Th>
+        </Tr>
+      </Thead>
+      <Tbody>
+        {recipes.map((recipe) => {
+          return (
+            <Tr key={recipe.id}>
+              <Td>
+                <Link to={"/recipe/" + recipe.id}>
+                  <p>{recipe.title}</p>
+                </Link>
+              </Td>
+              <Td>{recipe.description}</Td>
+              <Td>{recipe.username}</Td>
+              <Td>{recipe.date}</Td>
+            </Tr>
+          );
+        })}
+      </Tbody>
+    </Table>
+  );
+}
+
+export default AllRecipesList;
+
+{
+}
+
+{
+  /* <table id='allRecipesList__table'>
       <tr>
         <th>Name</th>
         <th>Description</th>
@@ -46,36 +82,5 @@ function AllRecipesList() {
           </tr>
         );
       })}
-    </table>
-  );
-}
-
-export default AllRecipesList;
-
-{
-  /* <Table id='allRecipesList__table'>
-      <Tr>
-        <Th>Name</Th>
-        <Th>Description</Th>
-        <Th>Created By</Th>
-        <Th>Date</Th>
-      </Tr>
-
-      {recipes.map((recipe) => {
-        return (
-          <Tr key={recipe.id}>
-            <Td>
-              <Link to={"/recipe/" + recipe.id}>
-                <p>{recipe.title}</p>
-              </Link>
-            </Td>
-            <Td>{recipe.description}</Td>
-            <Td>{recipe.username}</Td>
-            <Td>{recipe.date}</Td>
-          </Tr>
-        );
-      })}
-    </Table>
-  );
-} */
+    </table> */
 }

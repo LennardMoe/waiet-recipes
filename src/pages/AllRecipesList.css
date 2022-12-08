@@ -30,3 +30,7 @@
   background-color: var(--buttons);
   color: white;
 }
+
+Th {
+  background-color: red;
+}

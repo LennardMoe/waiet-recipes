@@ -43,12 +43,13 @@ function Recipe() {
             </p>
           ))}
         </div>
-        <p style={{ textAlign: "center" }}>{`Created by ${recipe.username} (${
-          date ? date[0] : ""
-        })`}</p>
+        <p
+          className='recipeInfo__createdBy'
+          style={{ textAlign: "center" }}
+        >{`Created by ${recipe.username} (${date ? date[0] : ""})`}</p>
       </div>
       <div className='recipeInfo__infoWrapper_Wrapper'>
-        <div className='recipeInfo__details'>
+        <div className='recipeInfo__buttonWrapper'>
           <button
             className={`heading__btn ${
               activeTab === "instructions" ? "active" : ""

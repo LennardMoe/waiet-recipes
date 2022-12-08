@@ -17,13 +17,27 @@
   grid-column-end: 4;
 }
 
-@media (min-width: 1024px) {
+.navbar__login {
+  margin: 0 4rem;
+  text-align: center;
+}
+
+.navbar__login > h4 {
+  font-size: 13px;
+}
+
+.navbar__login > p {
+  margin-top: 0.2rem;
+  font-weight: 500;
+}
+
+@media (min-width: 1300px) {
   .nav__responsiveWidth {
     display: none;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .nav__responsiveWidth {
     grid-row-start: 2;
     grid-row-end: 4;
@@ -33,7 +47,7 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1300px) {
   .nav__fullWidth {
     display: none;
   }
@@ -42,9 +56,11 @@
 .nav__menu {
   display: none;
   cursor: pointer;
+  z-index: 102;
 }
 
 .nav__menuBar {
+  z-index: 102;
   display: block;
   width: 25px;
   height: 3px;
@@ -54,7 +70,7 @@
   background-color: var(--buttons);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .nav__menu {
     display: block;
   }
@@ -85,9 +101,24 @@
     width: 90%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 2;
+    z-index: 101;
     background-color: var(--background);
     border: 2px var(--border) solid;
     padding: 1.2rem 0;
+    border-radius: 5px;
   }
+}
+
+.overlay {
+  display: block;
+  opacity: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 10000vw;
+  z-index: 100;
+  /* cursor: pointer; */
+  transition: opacity 0.3s;
 }
