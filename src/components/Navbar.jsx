@@ -16,15 +16,16 @@ function Navbar() {
   const [navMenu, setNavMenu] = useState(false);
 
   const navigateAccount = () => {
-    setNavMenu((current) => !current);
+    setNavMenu(false);
     navigate("/account");
   };
+
   const navigateLogin = () => {
-    setNavMenu((current) => !current);
+    setNavMenu(false);
     navigate("/login");
   };
   const navigateRegister = () => {
-    setNavMenu((current) => !current);
+    setNavMenu(false);
     navigate("/register");
   };
 
@@ -33,7 +34,7 @@ function Navbar() {
   };
 
   const logout = () => {
-    setNavMenu((current) => !current);
+    setNavMenu(false);
     logOut();
   };
   const changeClass = () => {
