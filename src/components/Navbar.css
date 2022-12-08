@@ -17,13 +17,27 @@
   grid-column-end: 4;
 }
 
-@media (min-width: 1024px) {
+.navbar__login {
+  margin: 0 4rem;
+  text-align: center;
+}
+
+.navbar__login > h4 {
+  font-size: 13px;
+}
+
+.navbar__login > p {
+  margin-top: 0.2rem;
+  font-weight: 500;
+}
+
+@media (min-width: 1300px) {
   .nav__responsiveWidth {
     display: none;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .nav__responsiveWidth {
     grid-row-start: 2;
     grid-row-end: 4;
@@ -33,7 +47,7 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1300px) {
   .nav__fullWidth {
     display: none;
   }
@@ -56,7 +70,7 @@
   background-color: var(--buttons);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .nav__menu {
     display: block;
   }

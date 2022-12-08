@@ -9,7 +9,7 @@
   color: var(--text);
   text-shadow: 2px 2px 4px var(--border-bright);
   line-height: 2.5rem;
-  margin: 2rem 0rem;
+  margin: 1rem 0rem;
 }
 .allRecipes__card {
   min-height: 25rem;

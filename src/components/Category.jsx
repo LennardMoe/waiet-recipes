@@ -30,12 +30,17 @@ function Category() {
 }
 
 const List = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 2rem 0rem;
+  margin: 1rem 0rem;
   @media ${devices.tablet} {
-    margin: 0;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin: 0 auto;
+    width: 50%;
+    margin-top: 5px;
   }
 `;
 
@@ -44,7 +49,8 @@ const SLink = styled(NavLink)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 25rem;
+
+  border-radius: 50%;
   margin-right: 2rem;
   text-decoration: none;
   background: linear-gradient(35deg, #494949, #313131);
@@ -53,15 +59,11 @@ const SLink = styled(NavLink)`
   cursor: pointer;
   transform: scale(0.8);
   @media ${devices.tablet} {
-    margin: 1rem 0.2rem;
-    min-width: fit-content;
-    min-height: fit-content;
-    text-align: center;
-  }
-  @media ${devices.mobileL} {
-    margin: 1rem 0rem;
-    min-height: fit-content;
-    text-align: center;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    font-size: 18px;
+    margin: 0 1rem;
   }
 
   h4 {

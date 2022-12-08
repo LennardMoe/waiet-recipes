@@ -82,9 +82,9 @@ function Navbar() {
               <div className='navbar__login'>
                 <h4>Logged in as </h4>
                 {userData.username ? (
-                  <h4> {userData.username} </h4>
+                  <p> {userData.username} </p>
                 ) : (
-                  <h4>{user.email}</h4>
+                  <p>{user.email}</p>
                 )}
               </div>
               <button className='nav__menuContent' onClick={logout}>
@@ -141,9 +141,9 @@ const Wrapper = styled.nav`
   margin: 0;
   box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.2);
   align-items: center;
-  @media ${devices.laptop} {
+  @media ${devices.laptopM} {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 3fr 1fr;
   }
 `;
 
@@ -159,7 +159,7 @@ const LogoLink = styled(Link)`
   color: #732e36;
   .logo__text {
     color: #732e36;
-    @media ${devices.laptop} {
+    @media ${devices.laptopM} {
       font-size: 1.4rem;
     }
   }
@@ -192,7 +192,7 @@ const Nav = styled.div`
     font-size: 1rem;
     font-family: "Alata";
     cursor: pointer;
-    @media ${devices.laptop} {
+    @media ${devices.laptopM} {
       min-width: 8rem;
       margin: 0.1rem;
       margin-left: 1rem;
@@ -201,7 +201,7 @@ const Nav = styled.div`
   button:hover {
     opacity: 0.9;
   }
-  @media ${devices.laptop} {
+  @media ${devices.laptopM} {
     flex-direction: column;
   }
 `;
