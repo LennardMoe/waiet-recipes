@@ -1,30 +1,32 @@
-import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { GiKnifeFork } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { auth, db } from "../firebase";
+import { db } from "../firebase";
 import Search from "./Search";
 import { UserAuth } from "../context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
-import Account from "../pages/Account";
 import { devices } from "../util/breakpoints";
 import "./Navbar.css";
+import { useRef } from "react";
 function Navbar() {
-  // const [user, setUser] = useState({});
-  const [userData, setUserData] = useState([]);
-  const [userName, setUserName] = useState("");
-  const { user, logOut } = UserAuth();
   const navigate = useNavigate();
+  const [userData, setUserData] = useState([]);
+  const { user, logOut } = UserAuth();
   const [navMenu, setNavMenu] = useState(false);
 
-  // onAuthStateChanged(auth, (currentUser) => {
-  //   setUser(currentUser);
-  // });
-
-  // const logout = async () => {
-  //   await signOut(auth);
-  // };
+  const navigateAccount = () => {
+    setNavMenu((current) => !current);
+    navigate("/account");
+  };
+  const navigateLogin = () => {
+    setNavMenu((current) => !current);
+    navigate("/login");
+  };
+  const navigateRegister = () => {
+    setNavMenu((current) => !current);
+    navigate("/register");
+  };
 
   const burger = () => {
     setNavMenu((current) => !current);
@@ -33,16 +35,12 @@ function Navbar() {
   const logout = () => {
     setNavMenu((current) => !current);
     logOut();
-    // navigate("/");
   };
   const changeClass = () => {
     const scrollValue = document.documentElement.scrollTop;
-    if (scrollValue != scrollValue) {
+    if (scrollValue > 1) {
       setNavMenu(false);
     }
-    // else{
-    //   setstate(false);
-    // }
   };
   window.addEventListener("scroll", changeClass);
 
@@ -65,10 +63,6 @@ function Navbar() {
       console.log("No User");
     }
   }, [user]);
-
-  // useEffect(() => {
-  //   setUserName(userData.username);
-  // }, [userData.username]);
 
   return (
     <Wrapper>
@@ -96,16 +90,14 @@ function Navbar() {
               <button className='nav__menuContent' onClick={logout}>
                 Logout
               </button>
-              {/* <AccountData> */}
-              <Link to={"/account"}>
-                <button className='nav__menuContent'>Account</button>
-              </Link>
-              {/* </AccountData> */}
-            </div>
 
+              <button onClick={navigateAccount} className='nav__menuContent'>
+                Account
+              </button>
+            </div>
+            <div className={`${navMenu ? "overlay" : ""}`}></div>
             <div
               onClick={burger}
-              onScroll={scroll}
               className={`nav__menu ${navMenu ? "navActive" : ""}`}
             >
               <span className='nav__menuBar '></span>
@@ -116,13 +108,14 @@ function Navbar() {
         ) : (
           <>
             <div className={`navbar__wrapper ${navMenu ? "navActive" : ""}`}>
-              <Link to={"/login/"}>
-                <button className='nav__menuContent'>Login</button>
-              </Link>
-              <Link to={"/register/"}>
-                <button className='nav__menuContent'>Register</button>
-              </Link>
+              <button onClick={navigateLogin} className='nav__menuContent'>
+                Login
+              </button>
+              <button onClick={navigateRegister} className='nav__menuContent'>
+                Register
+              </button>
             </div>
+            <div className={`${navMenu ? "overlay" : ""}`}></div>
             <div
               onClick={burger}
               className={`nav__menu ${navMenu ? "navActive" : ""}`}

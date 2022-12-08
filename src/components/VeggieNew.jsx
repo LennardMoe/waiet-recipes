@@ -43,9 +43,11 @@ function VeggieNew() {
             breakpoints: {
               1020: {
                 perPage: 2,
+                drag: true,
               },
               660: {
                 perPage: 1,
+                drag: true,
               },
             },
           }}

@@ -48,22 +48,24 @@ function AllRecipes() {
         <Splide
           options={{
             type: "loop",
-            // mediaQuery: "min",
+            // focus: "center",
             perPage: 4,
+            drag: "free",
             breakpoints: {
               1380: {
                 perPage: 3,
               },
               1020: {
                 perPage: 2,
+                drag: true,
               },
               660: {
                 perPage: 1,
+                drag: true,
               },
             },
 
             pagination: false,
-            drag: "free",
             gap: "5rem",
           }}
         >
