@@ -68,9 +68,7 @@ function Recipe() {
           </button>
         </div>
         <div className='recipeInfo__infoWrapper'>
-          <div
-          // className='recipeInfo__info'
-          >
+          <div>
             {activeTab === "instructions" && (
               <div className='recipeInfo__instructions'>
                 <h4

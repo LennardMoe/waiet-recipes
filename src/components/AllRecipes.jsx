@@ -66,7 +66,7 @@ function AllRecipes() {
             },
 
             pagination: false,
-            gap: "5rem",
+            gap: "4rem",
           }}
         >
           {recipes.map((recipe) => {

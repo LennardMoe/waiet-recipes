@@ -32,7 +32,7 @@ const Foot = styled.footer`
   box-shadow: 0 -2px 0px 0px rgba(0, 0, 0, 0.2);
   padding: 1rem;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
   justify-content: right;
   /* position: sticky; */
   gap: 2rem;
