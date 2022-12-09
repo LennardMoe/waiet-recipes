@@ -11,6 +11,7 @@ import AllRecipes from "../components/AllRecipes";
 import VeggieNew from "../components/VeggieNew";
 import HomeButtons from "../components/Button";
 import { devices } from "../util/breakpoints";
+import Category from "../components/Category";
 
 function Home() {
   return (
@@ -20,9 +21,10 @@ function Home() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
+      <Category />
       <Styling>
-        <HomeButtons text='New Recipes' link='/createRecipe/' />
-        <HomeButtons text='My Recipe' link='/MyRecipes/' />
+        <HomeButtons text='New Recipe' link='/createRecipe/' />
+        <HomeButtons text='My Recipes' link='/MyRecipes/' />
         <HomeButtons text='View All' link='/allRecipesList/' />
       </Styling>
       <AllRecipes />

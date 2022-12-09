@@ -140,6 +140,7 @@ const Wrapper = styled.nav`
   justify-content: space-between;
   flex-direction: row;
   margin: 0;
+  margin-bottom: 1rem;
   box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.2);
   align-items: center;
   @media ${devices.laptopM} {

@@ -1,6 +1,6 @@
 import "./App.css";
 import Pages from "./pages/Pages";
-import Category from "./components/Category";
+// import Category from "./components/Category";
 
 import { BrowserRouter, useLocation } from "react-router-dom";
 
@@ -16,7 +16,7 @@ function App() {
         <BrowserRouter>
           <Navbar />
           <div className='app__content'>
-            <Category />
+            {/* <Category /> */}
             <Pages />
           </div>
 

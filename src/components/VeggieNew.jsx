@@ -38,16 +38,18 @@ function VeggieNew() {
             perPage: 3,
             pagination: false,
             drag: "free",
-            gap: "5rem",
+            gap: "4rem",
             // focus: "center",
             breakpoints: {
               1020: {
                 perPage: 2,
                 drag: true,
+                gap: "3rem",
               },
               660: {
                 perPage: 1,
                 drag: true,
+                gap: "3rem",
               },
             },
           }}
